@@ -1,5 +1,4 @@
 SRC = src/main/main.go #Add more src files -> scr/YOURPACKAGE/FILENAME.go
-TEST = scr/main/main_test.go #Add more test files -> scr/YOURPACKAGE/FILENAME_test.go
 
 # Go parameters
 GOCMD=go
@@ -8,16 +7,17 @@ GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
-BINARY_NAME=src/bin/main
-BINARY_UNIX=$(BINARY_NAME)_unix
+BINARY_NAME=src/bin/
+
+DONTCOMPILE = ls -1 src/*/*.go | grep -v _test.go
 
 all: test build
 
 build:
-	$(GOBUILD) -o $(BINARY_NAME) $(SRC)
+	$(GOBUILD) ./...
 
 run:
-	$(GORUN) -v $(SRC)
+	go run $(SRC)
 	
 test: 
 	$(GOTEST) -v ./...
