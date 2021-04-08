@@ -7,28 +7,28 @@ import (
 	"time"
 )
 
-// Hello returns a greeting for the named person.
-// func Hello(name string) (string, error) {
-// 	// If no name was given, return an error with a message.
-// 	if name == "" {
-// 		return name, errors.New("empty name")
-// 	}
-// 	// Create a message using a random format.
-// 	message := fmt.Sprintf(randomFormat(), name)
-// 	return message, nil
-// }
-
-// Hello returns a greeting for the named person. SUPPOSED TO MAKE TEST FAIL
+//Hello returns a greeting for the named person.
 func Hello(name string) (string, error) {
 	// If no name was given, return an error with a message.
 	if name == "" {
 		return name, errors.New("empty name")
 	}
 	// Create a message using a random format.
-	// message := fmt.Sprintf(randomFormat(), name)
-	message := fmt.Sprint(randomFormat())
+	message := fmt.Sprintf(randomFormat(), name)
 	return message, nil
 }
+
+// // Hello returns a greeting for the named person. SUPPOSED TO MAKE TEST FAIL
+// func Hello(name string) (string, error) {
+// 	// If no name was given, return an error with a message.
+// 	if name == "" {
+// 		return name, errors.New("empty name")
+// 	}
+// 	// Create a message using a random format.
+// 	// message := fmt.Sprintf(randomFormat(), name)
+// 	message := fmt.Sprint(randomFormat())
+// 	return message, nil
+// }
 
 // Hellos returns a map that associates each of the named people
 // with a greeting message.
