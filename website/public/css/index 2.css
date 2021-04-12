@@ -6,12 +6,8 @@ html {
     -o-background-size: cover;
     background-size: cover;
 
+
 }
-
-
-
-/*All these columns should be floating to the left, and have a padding of 15px:*/
-
 
 body {
     /*background-image: linear-gradient( rgb(0,125,0), white);*/
@@ -26,10 +22,6 @@ body {
     left:0;
     right:0;
 }
-
 h1{
     text-align:center;
-}
-#main{
-    margin:0 auto;
 }
