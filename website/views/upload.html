@@ -10,31 +10,20 @@
     <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
   </head>
 
-  <!-- kallar <div> med id "main" för att komma åt alla element i Vue -->
+  <!-- kallar <body> med id "main" för att  komma åt alla element i Vue -->
     <div id="main">
       <body >
 
         <header class="header">
-          <button v-on:click="extendSidebar" id="sidebarButton">&#9776</button>
+
           <h1 id="headerText"> Welcome to ShapeItUp! </h1>
         </header>
-
-        <div id="sideBar" class="col-sidebar">
-          <a href="javascript:void(0)" class="closebtn"  v-on:click="retractSidebar">×</a>
-          <a href="#">Guide</a>
-          <a href="#">Behind the algorithm</a>
-          <a href="#">About Us</a>
-          <a href="#">Contact</a>
-        </div>
-
         <div id="formInput" class="col-12">
-          <form  id="form" method="post" enctype="multipart/form-data" action="/upload"  class="">
-            <input type="file" name="file">
-            <input type="submit" value="Submit">
+          <form  id="form" method="delete" enctype="multipart/form-data" action="/"  class="">
+            <input type="button" value="Delete picture">
           </form>
 
         </div>
-
       </body>
     </div>
 </html>

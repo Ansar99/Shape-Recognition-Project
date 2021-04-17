@@ -79,7 +79,7 @@ app.post(
         }
     }
 );
-app.delete(""
+app.delete("/"
 
           );
 const server = http.listen(app.get('port'), function() {
