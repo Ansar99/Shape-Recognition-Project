@@ -57,5 +57,5 @@ func randomFormat() string {
 }
 
 func main() {
-	fmt.Printf("hej")
+	fmt.Printf("hej\n")
 }

@@ -183,9 +183,15 @@ body {
     justify-content: center;
 
 }
+
 #form{
     widht:100px;
     height:50px;
     margin-top: 20%;
 
+}
+#output{
+    margin-top:30px;
+    text-align:center;
+    font-size:30px;
 }

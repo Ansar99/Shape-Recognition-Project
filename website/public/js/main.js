@@ -1,13 +1,21 @@
 'use strict';
+const socket = io();
+
 
 const vm = new Vue({
     el:"#main",
     data:{
-        sidebarD:''
+        str:"",
     },
 
     created: function() {
-        console.log("Demo");
+
+        socket.on('runGo', function(result){
+            //TODO: läs output från fil och skicka till sidan hemsidan
+            console.log("Demo");
+            console.log("här är resultatet " + result.output);
+            this.str = result.output;
+        }.bind(this));
 
     },
 
@@ -15,9 +23,6 @@ const vm = new Vue({
         retractSidebar: function(){
             let sidebar = document.getElementById("sideBar");
             sidebar.style.display="none";
-
-
-
 
 
         },

@@ -8,6 +8,9 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const path = require('path');
+const runGo  = require('child_process');
+const cat  = require('child_process');
+
 
 // file system module från nodejs
 const fs = require('fs');
@@ -64,7 +67,18 @@ app.post(
                     .contentType("text/html")
                     .sendFile(path.join(__dirname, 'views/upload.html'))
 
+                //execSync exekverar kommandot synkront, dvs cat.exec körs efter att runGo.execsync är klar
+                runGo.execSync("go run ../src/main/main.go  > output.txt",(error,stdout,stderr) => {
+                    //console.log(`stdout: ${stdout}`);
+                });
 
+                io.on('connection',function(socket){
+                    cat.exec("cat output.txt",(error,stdout,stderr) =>{
+                        console.log(stdout);
+                        socket.emit('runGo', { output: stdout} );
+                    });
+
+                });
 
             });
         } else {
@@ -79,9 +93,10 @@ app.post(
         }
     }
 );
-app.delete(""
 
-          );
+app.delete('/remove',function(req,res){
+    console.log("app.Delete called!");
+});
 const server = http.listen(app.get('port'), function() {
     console.log('Server listening on port ' + app.get('port'));
 });

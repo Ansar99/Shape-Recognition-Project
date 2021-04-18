@@ -2,6 +2,7 @@
 <html>
   <head>
     <script src="https://vuejs.org/js/vue.js" ></script>
+    <script src="/socket.io/socket.io.js" defer></script>
     <script src="js/main.js" defer></script>
     <link rel="stylesheet" type="text/css" href="css/reset.css" defer>
     <link rel="stylesheet" type="text/css" href="css/index.css">
@@ -18,9 +19,12 @@
 
           <h1 id="headerText"> Welcome to ShapeItUp! </h1>
         </header>
+
         <div id="formInput" class="col-12">
-          <form  id="form" method="delete" enctype="multipart/form-data" action="/"  class="">
+
+          <form  id="form" method="delete" enctype="multipart/form-data" action="/remove"  class="">
             <input type="button" value="Delete picture">
+            <p id="output">{{str}}</p>
           </form>
 
         </div>
