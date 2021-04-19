@@ -16,11 +16,6 @@ import (
 	"gocv.io/x/gocv"
 )
 
-type Result struct {
-	Shape     string
-	Textpoint image.Point
-}
-
 func main() {
 	if len(os.Args) < 2 {
 		fmt.Println("usage: go run main.go ./images/selected_image.jpg")
@@ -39,7 +34,7 @@ func main() {
 		fmt.Println("Creation of grayscaled Mat succeeded")
 	}
 
-	updatedshapeimg := markAndFindShapes(shapeimg, img)
+	updatedshapeimg := markAndFindShaped(shapeimg, img)
 	shapeimgconversion := gocv.IMWrite("./shapedImages/shapedimage2.jpg", updatedshapeimg)
 	if shapeimgconversion {
 		fmt.Println("Image2 saved successfully")
@@ -50,51 +45,41 @@ func main() {
 	log.Printf("shapeidentifier took: %s", elapsed)
 }
 
-func markAndFindShapes(shapeimg gocv.Mat, img gocv.Mat) gocv.Mat {
+func markAndFindShaped(shapeimg gocv.Mat, img gocv.Mat) gocv.Mat {
 	canny := gocv.NewMat()
 	defer canny.Close()
 	gocv.Canny(shapeimg, &canny, 10, 10)
 
 	contours := gocv.FindContours(canny, gocv.RetrievalList, gocv.ChainApproxTC89L1)
 	imgpoints := contours.ToPoints() // type: [][]image.Point
-	amtOfJobs := contours.Size()
 
-	jobs := make(chan int, amtOfJobs)
-	result := make(chan Result, amtOfJobs)
-
-	for amountOfRoutines := 0; amountOfRoutines < amtOfJobs; amountOfRoutines++ {
-		go worker(shapeimg, contours, imgpoints, jobs, result)
-		//fmt.Println("created new worker")
-	}
-	//shapes := make(chan gocv.Mat, amtOfJobs)
-
-	for i := 0; i < amtOfJobs; i = i + 2 {
-		jobs <- i
-	}
-	close(jobs)
-
-	for j := 0; j < amtOfJobs; j = j + 2 {
-		shaperesult := <-result
-		red := color.RGBA{255, 0, 0, 0}
-		gocv.PutText(&shapeimg, shaperesult.Shape, shaperesult.Textpoint, 2, 1, red, 1)
-		fmt.Printf("\t %s\n", shaperesult.Shape)
-	}
-
-	gocv.DrawContours(&shapeimg, contours, -1, color.RGBA{0, 0, 255, 0}, 1)
-	return shapeimg
-}
-
-func worker(shapeimg gocv.Mat, contours gocv.PointsVector, imgpoints [][]image.Point, jobs <-chan int, result chan<- Result) {
-	for i := range jobs {
+	for i := 0; i < contours.Size(); i = i + 2 {
 		shapeimgpointvector := imgpoints[i]
 		shapevector := gocv.NewPointVectorFromPoints(shapeimgpointvector)
 
-		shapedetectresult := detectshape(shapevector)
-		result <- shapedetectresult
+		/*shapeperimetertest := gocv.ArcLength(shapevector, true)
+		shapeguesstest := gocv.ApproxPolyDP(shapevector, 0.03*shapeperimetertest, true)
+		shapeguessRightTypetest := shapeguesstest.ToPoints()
+		fmt.Println(shapeguessRightTypetest)
+		greentest := color.RGBA{0, 255, 0, 0}
+		if len(shapeguessRightTypetest) == 8 {
+			for j := 0; j < 8; j++ {
+				gocv.Circle(&shapeimg, shapeguessRightTypetest[j], 2, greentest, 3)
+			}
+		}*/ // Bra att ha för att se punkterna på en cirkel, om nu isOctagon behöver omdefinieras.
+
+		shape, textpoint := detectshape(shapevector)
+		red := color.RGBA{255, 0, 0, 0}
+		gocv.PutText(&shapeimg, shape, textpoint, 2, 1, red, 1)
+		fmt.Printf("\t %s\n", shape)
 	}
+
+	gocv.DrawContours(&shapeimg, contours, -1, color.RGBA{0, 0, 255, 0}, 1)
+
+	return shapeimg
 }
 
-func detectshape(pvr gocv.PointVector) Result {
+func detectshape(pvr gocv.PointVector) (string, image.Point) {
 	shape := "unidentified shape"
 	shapeperimeter := gocv.ArcLength(pvr, true)                     // Calculates the perimeter (omkrets) of the current shape
 	shapeguess := gocv.ApproxPolyDP(pvr, 0.03*shapeperimeter, true) // A polygonal curve - A curve that is entirely made up of line segments. ( no arcs) A closed curve - A curve that begins and ends in the same location.
@@ -142,11 +127,7 @@ func detectshape(pvr gocv.PointVector) Result {
 		shape = "circle"
 	} // Lägg till mer former här! :-D
 
-	var result Result
-	result.Shape = shape
-	result.Textpoint = textpoint
-
-	return result
+	return shape, textpoint
 }
 
 func calculateDistanceBetweenTwoPoints(point1 image.Point, point2 image.Point) float64 {
