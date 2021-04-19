@@ -1,1 +1,7 @@
-hej
+Creation of grayscaled Mat succeeded
+	 rectangle
+	 triangle
+	 square
+	 circle
+	 rectangle
+Image2 saved successfully

@@ -8,6 +8,7 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const path = require('path');
+
 const runGo  = require('child_process');
 const cat  = require('child_process');
 
@@ -24,6 +25,9 @@ app.set('port', (process.env.PORT || port));
 
 // Serve static assets from public/
 app.use(express.static(path.join(__dirname, 'public/')));
+
+app.use(express.static(path.join(__dirname, 'shapedImages/')));
+
 
 // Serve vue from node_modules as vue/
 app.use('/vue',
@@ -56,9 +60,9 @@ app.post(
     upload.single("file" /* name attribute of <file> element in your form */),
     (req, res) => {
         const tempPath = req.file.path;
-        const targetPath = path.join(__dirname, "./public/images/image.png");
+        const targetPath = path.join(__dirname, "./public/images/image.jpg");
 
-        if (path.extname(req.file.originalname).toLowerCase() === ".png") {
+        if (path.extname(req.file.originalname).toLowerCase() === ".jpg") {
             fs.rename(tempPath, targetPath, err => {
                 if (err) return handleError(err, res);
 
@@ -66,10 +70,11 @@ app.post(
                     .status(200)
                     .contentType("text/html")
                     .sendFile(path.join(__dirname, 'views/upload.html'))
-
+                //exec.execSync("export GOPATH=$(../src)");
                 //execSync exekverar kommandot synkront, dvs cat.exec körs efter att runGo.execsync är klar
-                runGo.execSync("go run ../src/main/main.go  > output.txt",(error,stdout,stderr) => {
-                    //console.log(`stdout: ${stdout}`);
+
+                runGo.execSync("go run ../src/shapeitup/main.go public/images/image.jpg  > output.txt",(error,stdout,stderr) => {
+
                 });
 
                 io.on('connection',function(socket){
@@ -88,7 +93,7 @@ app.post(
                 res
                     .status(403)
                     .contentType("text/plain")
-                    .end("Only .png files are allowed!");
+                    .end("Only .jpg files are allowed!");
             });
         }
     }
