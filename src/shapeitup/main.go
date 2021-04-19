@@ -83,8 +83,8 @@ func detectshape(pvr gocv.PointVector) (string, image.Point) {
 
 	shapeguessRightType := shapeguess.ToPoints() // Done for valuable performance gain
 
-	textpoint := shapeguessRightType[1]
-	textpoint.X = textpoint.X - 100
+	textpoint := shapeguessRightType[0]
+	textpoint.X = textpoint.X - 5
 	vertices := len(shapeguessRightType)
 	if vertices == 3 {
 		shape = "triangle"

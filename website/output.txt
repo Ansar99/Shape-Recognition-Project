@@ -1,7 +1,10 @@
 Creation of grayscaled Mat succeeded
-	 rectangle
-	 triangle
-	 square
 	 circle
-	 rectangle
+	 circle
+	 circle
+	 circle
+	 octagon
+	 circle
+	 circle
+	 circle
 Image2 saved successfully
