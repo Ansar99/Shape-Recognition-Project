@@ -1,7 +1,7 @@
 package main
 
-// RUN BY TYPING: go run main.go ./images/circles.jpg
-// or choose your own image: go run main.go ./images/selected_image.jpg
+// RUN BY TYPING: go run main.go images/circles.jpg
+// or choose your own image: go run main.go images/selected_image.jpg
 
 import (
 	"errors"
@@ -11,6 +11,7 @@ import (
 	"log"
 	"math"
 	"os"
+	"runtime"
 	"time"
 
 	"gocv.io/x/gocv"
@@ -23,7 +24,7 @@ type Result struct {
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("usage: go run main.go ./images/selected_image.jpg")
+		fmt.Println("usage: go run main.go images/selected_image.jpg")
 		return
 	}
 	start := time.Now()
@@ -31,8 +32,6 @@ func main() {
 	imageloc := os.Args[1]
 
 	img, shapeimg, err := imageToGrayscaleMat(imageloc)
-	defer img.Close()
-	defer shapeimg.Close()
 	if err != nil {
 		log.Fatalf("Error while creating grayscaled Mat: %v", err)
 	} else {
@@ -52,7 +51,6 @@ func main() {
 
 func markAndFindShapes(shapeimg gocv.Mat, img gocv.Mat) gocv.Mat {
 	canny := gocv.NewMat()
-	defer canny.Close()
 	gocv.Canny(shapeimg, &canny, 10, 10)
 
 	contours := gocv.FindContours(canny, gocv.RetrievalList, gocv.ChainApproxTC89L1)
@@ -61,12 +59,10 @@ func markAndFindShapes(shapeimg gocv.Mat, img gocv.Mat) gocv.Mat {
 
 	jobs := make(chan int, amtOfJobs)
 	result := make(chan Result, amtOfJobs)
-
-	for amountOfRoutines := 0; amountOfRoutines < amtOfJobs; amountOfRoutines++ {
+	fmt.Println(runtime.NumCPU())
+	for amountOfRoutines := 0; amountOfRoutines < runtime.NumCPU()-1; amountOfRoutines++ {
 		go worker(shapeimg, contours, imgpoints, jobs, result)
-		//fmt.Println("created new worker")
 	}
-	//shapes := make(chan gocv.Mat, amtOfJobs)
 
 	for i := 0; i < amtOfJobs; i = i + 2 {
 		jobs <- i
@@ -77,7 +73,7 @@ func markAndFindShapes(shapeimg gocv.Mat, img gocv.Mat) gocv.Mat {
 		shaperesult := <-result
 		red := color.RGBA{255, 0, 0, 0}
 		gocv.PutText(&shapeimg, shaperesult.Shape, shaperesult.Textpoint, 2, 1, red, 1)
-		fmt.Printf("\t %s\n", shaperesult.Shape)
+		//fmt.Printf("\t %s\n", shaperesult.Shape)
 	}
 
 	gocv.DrawContours(&shapeimg, contours, -1, color.RGBA{0, 0, 255, 0}, 1)
@@ -169,14 +165,14 @@ func isOctagon(points []image.Point) bool {
 func imageToGrayscaleMat(imgname string) (gocv.Mat, gocv.Mat, error) {
 	img := gocv.IMRead(imgname, gocv.IMReadGrayScale) // Laddar in bilden satt av Args[1] och lägger den i variabeln img som är en grayscalade Mat.
 	if img.Empty() {
-		return gocv.Mat{}, gocv.Mat{}, errors.New("Image img in imageToGrayscaleMat is empty")
+		return gocv.Mat{}, gocv.Mat{}, errors.New("image img in imageToGrayscaleMat is empty")
 	}
 	gocv.MedianBlur(img, &img, 11) // blurrar bilden, tar bort noise
 
 	shapeimg := gocv.NewMat()                          // skapar en ny mat
 	gocv.CvtColor(img, &shapeimg, gocv.ColorGrayToBGR) // Kopierar över bilden från img till shapeimg samt circleimg
 	if shapeimg.Empty() {
-		return gocv.Mat{}, gocv.Mat{}, errors.New("Image shapeimg in imageToGrayscaleMat is empty")
+		return gocv.Mat{}, gocv.Mat{}, errors.New("image shapeimg in imageToGrayscaleMat is empty")
 	}
 
 	return img, shapeimg, nil
