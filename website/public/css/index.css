@@ -16,9 +16,6 @@ html {
   ALLMÄNT
 */
 body {
-    /*background-image: linear-gradient( rgb(0,125,0), white);*/
-    /*background-image:linear-gradient(rgb(14, 16, 61), rgb(211, 188, 192));*/
-    /*background-repeat: repeat-x;*/
     font-family: 'Saira Stencil One',"Gaegu";
     /*
       fyller <body> till ändarna av viewport
@@ -27,7 +24,6 @@ body {
     bottom:0;
     left:0;
     right:0;
-
     margin:0;
     color:white;
 }
@@ -44,7 +40,7 @@ body {
 
 
 /*
-  Använder en responsive grid-view med 12 kolumner för att ha mer kontroll över sidan.
+  Använder en responsive grid-view med 12 kolumner för att ha bättre kontroll/struktur över sidan.
   En kolumn: 100% / 12 = 8.33%
 */
 .col-1 {width: 8.33%;}
@@ -71,7 +67,9 @@ body {
 
 }
 
-/* Rubriktexten */
+/*
+  CSS FÖR RUBRIKEN
+*/
 #headerText{
     width:370px;
     height:50px;
@@ -84,7 +82,7 @@ body {
   Använder flex för att organisera sidomeny-knappen och rubriktexten
 */
 .Header {
-    position:sticky;
+    position:fixed;
     top:0;
     display:flex;
     text-align:center;
@@ -103,15 +101,15 @@ body {
 #sideBar{
     position:fixed;
     height: 100%;
+    width:200px;
+
     /*
       anger att sidebar är i förgrunden (z-index: -1 sätter elementet i bakgrunden)
    */
     z-index: 1;
     top: 50;
     left: 0;
-
     padding-top: 40px;
-
     background-color: rgb(190,190,190);
     transition: 0.5s;
 
@@ -120,11 +118,13 @@ body {
 }
 
 #sidebar a{
-    padding: 20px 0px 20px 20px;
+    padding: 15px 15px 10px 10px;
+
+    margin-bottom: 30px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 30px;
     color: white;
-    display: block;
+    display:block;
     transition: 0.7s;
 }
 
@@ -164,10 +164,10 @@ body {
   CSS FÖR SIDOMENYNS "STÄNG KNAPP" (ett kryss)
 */
 .closebtn{
-    font-size:30px;
+
     position: absolute;
-    margin-left: 100px;
-    top:0px;
+    margin-left: 70%;
+    top:-20px;
 
 }
 
