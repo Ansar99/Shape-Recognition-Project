@@ -6,8 +6,10 @@
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const io = require('socket.io')(http); //TA BORT ?
 const path = require('path');
+const crypto = require("crypto");
+const parse = require('node-html-parser').parse;
 
 const runGo  = require('child_process');
 const cat  = require('child_process');
@@ -64,8 +66,11 @@ app.post(
 
     (req, res) => {
 
+        var id = crypto.randomBytes(12).toString("hex"); //ANTON    
+        console.log(id);  //ANTON
+
         const tempPath = req.file.path;
-        const targetPath = path.join(__dirname, "./public/images/image.jpg");
+        var targetPath = path.join(__dirname, "./public/images/" + id + ".jpg");  //ändrade till var ANTON
 
         // We simply check if the file is in .jpg format
         if (path.extname(req.file.originalname).toLowerCase() === ".jpg") {
@@ -73,24 +78,27 @@ app.post(
             fs.rename(tempPath, targetPath, err => {
                 if (err) return handleError(err, res);
 
-                res
-                    .status(200)
-                    .contentType("text/html")
-                    .sendFile(path.join(__dirname, 'views/upload.html'))
-
                 //execSync(Command) executes Command synchronously, that way exec(cat....) won't execute before the Go program
-                runGo.execSync("go run ../src/shapeitup/main.go public/images/image.jpg  > output.txt",(error,stdout,stderr) => {
+                runGo.execSync("go run ../src/shapeitup/main.go public/images/" + id + ".jpg " + id + "  > output.txt",(error,stdout,stderr) => {  //ANTON SKITA I OUTPUT ?
 
                 });
 
-                // Sends a message to the client with the output from the program.
-                io.on('connection',function(socket){
-                    cat.exec("cat output.txt",(error,stdout,stderr) =>{
-                        console.log(stdout);
-                        socket.emit('runGo', { output: stdout} );
-                    });
-
-                });
+                fs.readFile('views/upload.html', 'utf8', (err,html)=>{
+                    if(err){
+                       throw err;
+                    }
+                 
+                    const root = parse(html);
+                    const outputContainer = root.querySelector('#outputContainer');
+                    //outputContainer.appendChild('<img src="images/image.jpg" id="inputPicture">');
+                    //outputContainer.appendChild('<img src="shapedimage2.jpg" id="outputPicture">');  //VARFÖR FUNKAR INTE APPEND CHILD
+                    outputContainer.set_content('<img src="images/' + id + '.jpg" id="inputPicture"><img src="shaped_' + id + '.jpg" id="outputPicture">');
+                    res
+                        .status(200)
+                        .contentType("text/html")
+                        //.sendFile(path.join(__dirname, 'views/upload.html'))
+                        .send(root.toString())
+                  });
 
             });
         }

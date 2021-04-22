@@ -16,11 +16,13 @@ import (
 )
 
 func main() {
-	if len(os.Args) < 2 {
-		fmt.Println("usage: go run main.go ./images/selected_image.jpg")
+	if len(os.Args) < 3 {
+		fmt.Println("usage: go run main.go ./images/selected_image.jpg selected_image.jpg") //ANTON
 		return
 	}
+
 	imageloc := os.Args[1]
+	imagename := os.Args[2]
 
 	img, circleimg, shapeimg, err := imageToGrayscaleMat(imageloc)
 	defer img.Close()
@@ -33,7 +35,7 @@ func main() {
 	}
 
 	updatedshapeimg := markAndFindShaped(shapeimg, img)
-	shapeimgconversion := gocv.IMWrite("./shapedImages/shapedimage2.jpg", updatedshapeimg)
+	shapeimgconversion := gocv.IMWrite("./shapedImages/shaped_"+imagename+".jpg", updatedshapeimg) //ANTON
 	if shapeimgconversion {
 		fmt.Println("Image2 saved successfully")
 	} else {
