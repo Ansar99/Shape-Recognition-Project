@@ -6,23 +6,11 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 pentagon
-	 circle
-	 circle
+	 triangle
 	 square
 	 circle
-	 circle
 	 triangle
 	 circle
-	 nonagon
-	 pentagon
 	 circle
 	 circle
 	 circle
@@ -30,156 +18,17 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 triangle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 rectangle
-	 circle
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
 	 circle
 	 circle
 	 circle
 	 hexagon
-	 circle
 	 hexagon
 	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 pentagon
-	 circle
-	 square
-	 circle
-	 circle
-	 pentagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 square
-	 square
-	 hexagon
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 nonagon
-	 circle
-	 circle
-	 pentagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
 	 circle
 	 circle
 	 circle
 	 circle
 	 pentagon
-	 pentagon
-	 circle
-	 square
-	 square
-	 circle
-	 circle
-	 circle
-	 pentagon
-	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 pentagon
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 nonagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 nonagon
-	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
 	 circle
 	 circle
 	 hexagon
@@ -187,11 +36,39 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
 	 circle
 	 square
 	 circle
 	 circle
 	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
 	 circle
 	 circle
 	 circle
@@ -200,30 +77,89 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 heptagon
-	 hexagon
-	 hexagon
 	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 octagon
+	 heptagon
 	 nonagon
 	 circle
 	 circle
 	 circle
+	 pentagon
+	 circle
+	 circle
+	 triangle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
 	 circle
 	 square
 	 circle
-	 square
-	 triangle
-	 circle
-	 triangle
 	 circle
 	 circle
 	 circle
 	 nonagon
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 heptagon
+	 triangle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 square
+	 hexagon
+	 heptagon
 	 circle
 	 circle
 	 circle
@@ -233,21 +169,51 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 hexagon
+	 circle
+	 circle
 	 triangle
 	 circle
 	 circle
 	 circle
 	 circle
 	 circle
+	 heptagon
 	 circle
-	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
 	 octagon
 	 circle
 	 circle
 	 circle
 	 circle
 	 circle
-	 triangle
 	 pentagon
 	 circle
 	 circle
@@ -256,73 +222,8 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 circle
-	 pentagon
 	 circle
 	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 triangle
-	 pentagon
-	 circle
-	 square
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 hexagon
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 square
-	 square
-	 triangle
-	 circle
-	 circle
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 pentagon
 	 square
 	 circle
 	 circle
@@ -333,11 +234,36 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 square
+	 circle
+	 hexagon
+	 circle
+	 square
+	 circle
+	 rectangle
+	 circle
+	 circle
+	 heptagon
+	 square
+	 square
+	 circle
+	 circle
+	 square
+	 circle
+	 square
+	 circle
 	 square
 	 circle
 	 circle
 	 circle
+	 circle
+	 circle
+	 circle
 	 triangle
+	 square
+	 square
+	 pentagon
+	 circle
+	 circle
 	 circle
 	 circle
 	 circle
@@ -345,57 +271,209 @@ Creation of grayscaled Mat succeeded
 	 heptagon
 	 circle
 	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 hexagon
+	 square
+	 triangle
+	 square
+	 circle
+	 circle
+	 heptagon
+	 hexagon
+	 circle
+	 circle
 	 pentagon
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 triangle
+	 triangle
+	 triangle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 heptagon
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 square
+	 triangle
+	 circle
+	 square
+	 circle
+	 square
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 heptagon
+	 circle
+	 circle
+	 circle
+	 nonagon
+	 rectangle
+	 circle
+	 circle
+	 circle
 	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 triangle
+	 hexagon
+	 circle
+	 circle
+	 triangle
+	 square
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 heptagon
+	 circle
+	 rectangle
+	 circle
+	 square
+	 circle
+	 square
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 square
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 rectangle
+	 circle
+	 nonagon
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 pentagon
+	 heptagon
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 pentagon
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 square
+	 hexagon
+	 nonagon
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
 	 circle
 	 circle
 	 octagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 hexagon
-	 square
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
+	 triangle
 	 pentagon
+	 triangle
+	 triangle
 	 circle
 	 circle
 	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
 	 circle
 	 heptagon
+	 square
 	 circle
-	 rectangle
-	 circle
-	 circle
+	 triangle
 	 circle
 	 circle
 	 circle
@@ -403,285 +481,117 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 heptagon
 	 circle
+	 square
 	 circle
 	 circle
+	 triangle
+	 square
+	 circle
+	 hexagon
 	 circle
 	 circle
-	 circle
-	 circle
+	 square
 	 heptagon
 	 circle
 	 circle
 	 circle
 	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
 	 hexagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
 	 square
-	 square
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 hexagon
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 hexagon
-	 nonagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 rectangle
-	 circle
-	 circle
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 triangle
-	 pentagon
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 nonagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 square
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 rectangle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 pentagon
-	 circle
-	 rectangle
-	 triangle
-	 square
-	 circle
-	 square
-	 circle
-	 circle
-	 nonagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 pentagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 nonagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 pentagon
-	 pentagon
-	 circle
 	 octagon
+	 circle
+	 square
 	 square
 	 circle
 	 circle
 	 circle
 	 circle
 	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 triangle
 	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 nonagon
 	 circle
 	 square
 	 circle
 	 circle
 	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
+	 heptagon
 	 hexagon
-	 circle
-	 hexagon
-	 circle
 	 pentagon
-	 hexagon
 	 square
-	 circle
-	 circle
-	 circle
-	 circle
+	 square
 	 circle
 	 pentagon
 	 circle
 	 circle
 	 circle
+	 square
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 square
+	 circle
+	 circle
+	 square
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 square
+	 heptagon
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 triangle
+	 circle
 	 circle
 	 square
 	 circle
@@ -690,27 +600,10 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 circle
-	 triangle
 	 circle
+	 heptagon
 	 circle
-	 circle
-	 square
-	 triangle
-	 triangle
-	 circle
-	 circle
-	 square
 	 hexagon
-	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
 	 circle
 	 circle
 	 circle
@@ -719,87 +612,29 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 circle
-	 square
 	 circle
-	 square
 	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 rectangle
 	 hexagon
 	 circle
 	 circle
 	 circle
 	 circle
 	 circle
+	 circle
+	 circle
 	 hexagon
-	 triangle
+	 circle
 	 hexagon
-	 square
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
 	 circle
 	 circle
 	 circle
 	 circle
 	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 square
-	 circle
-	 circle
-	 circle
-	 square
-	 square
-	 octagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 heptagon
-	 circle
 	 circle
 	 circle
 	 circle
@@ -807,14 +642,172 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 square
+	 circle
+	 square
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 triangle
+	 circle
+	 pentagon
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 pentagon
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
 	 circle
 	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 hexagon
+	 hexagon
+	 heptagon
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 rectangle
+	 square
+	 triangle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 square
+	 triangle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 pentagon
+	 heptagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 rectangle
+	 circle
 	 circle
 	 circle
 	 square
 	 heptagon
 	 circle
+	 circle
+	 circle
+	 circle
+	 heptagon
+	 circle
+	 circle
+	 circle
 	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 heptagon
+	 pentagon
+	 square
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 square
+	 circle
+	 square
+	 circle
+	 circle
 	 circle
 	 circle
 	 circle
@@ -823,18 +816,64 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 triangle
 	 circle
+	 octagon
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 triangle
+	 rectangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
 	 circle
 	 heptagon
+	 triangle
+	 circle
+	 square
+	 circle
+	 circle
+	 rectangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 square
+	 circle
+	 hexagon
+	 square
+	 circle
+	 circle
 	 square
 	 circle
 	 circle
 	 circle
 	 circle
 	 circle
-	 circle
-	 circle
 	 square
 	 circle
+	 square
 	 circle
 	 circle
 	 circle
@@ -844,6 +883,692 @@ Creation of grayscaled Mat succeeded
 	 nonagon
 	 circle
 	 circle
+	 square
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 square
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 hexagon
+	 circle
+	 pentagon
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 square
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 square
+	 circle
+	 circle
+	 square
+	 circle
+	 octagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 heptagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 hexagon
+	 square
+	 circle
+	 circle
+	 square
+	 square
+	 pentagon
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 triangle
+	 square
+	 square
+	 square
+	 hexagon
+	 triangle
+	 circle
+	 circle
+	 octagon
+	 circle
+	 circle
+	 circle
+	 nonagon
+	 circle
+	 heptagon
+	 circle
+	 circle
+	 hexagon
+	 square
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 square
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 hexagon
+	 square
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 heptagon
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 square
+	 circle
+	 circle
+	 triangle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 square
+	 triangle
+	 square
+	 nonagon
+	 nonagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 square
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 square
+	 heptagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 triangle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 square
+	 hexagon
+	 square
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 octagon
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 nonagon
+	 circle
+	 heptagon
+	 pentagon
+	 circle
+	 pentagon
+	 circle
+	 heptagon
+	 triangle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 square
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 square
+	 triangle
+	 hexagon
+	 circle
+	 octagon
+	 circle
+	 circle
+	 square
+	 hexagon
+	 triangle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 octagon
+	 circle
+	 square
+	 square
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 square
+	 circle
+	 hexagon
+	 triangle
+	 triangle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 heptagon
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 heptagon
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 hexagon
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 pentagon
+	 octagon
+	 circle
+	 circle
+	 circle
+	 heptagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 pentagon
+	 octagon
+	 square
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 triangle
+	 triangle
+	 square
+	 circle
+	 square
+	 triangle
+	 square
+	 square
+	 pentagon
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 octagon
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 square
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 triangle
+	 hexagon
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 square
+	 circle
+	 octagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 heptagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
 	 triangle
 	 circle
 	 square
@@ -851,40 +1576,117 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 heptagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 hexagon
+	 heptagon
+	 circle
 	 square
 	 circle
 	 circle
 	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 octagon
+	 circle
+	 rectangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
 	 square
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 pentagon
+	 circle
 	 triangle
 	 circle
 	 square
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
 	 square
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
 	 triangle
 	 circle
 	 circle
-	 hexagon
+	 circle
+	 circle
+	 square
+	 heptagon
+	 circle
+	 square
+	 nonagon
+	 circle
+	 circle
+	 nonagon
 	 circle
 	 circle
 	 circle
 	 square
 	 circle
 	 circle
-	 hexagon
 	 circle
 	 circle
 	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 hexagon
 	 circle
 	 nonagon
 	 circle
@@ -894,107 +1696,8 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
 	 hexagon
 	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 triangle
-	 pentagon
-	 circle
-	 square
-	 circle
-	 triangle
-	 square
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 octagon
-	 circle
-	 nonagon
-	 circle
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 pentagon
-	 circle
-	 circle
-	 circle
-	 pentagon
-	 circle
-	 octagon
-	 triangle
-	 circle
-	 triangle
-	 square
-	 circle
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 triangle
-	 pentagon
-	 triangle
-	 circle
-	 circle
-	 square
-	 circle
-	 octagon
-	 circle
-	 circle
-	 square
-	 heptagon
 	 circle
 	 heptagon
 	 circle
@@ -1003,82 +1706,9 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 circle
-	 square
-	 circle
-	 square
-	 circle
-	 hexagon
-	 square
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 pentagon
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 pentagon
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 hexagon
 	 circle
 	 heptagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 heptagon
-	 circle
-	 circle
-	 circle
-	 pentagon
-	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
+	 square
 	 circle
 	 circle
 	 circle
@@ -1103,30 +1733,6 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 triangle
 	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 nonagon
-	 square
-	 square
-	 square
-	 circle
-	 circle
-	 pentagon
-	 square
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 circle
-	 pentagon
 	 circle
 	 circle
 	 circle
@@ -1136,68 +1742,122 @@ Creation of grayscaled Mat succeeded
 	 rectangle
 	 circle
 	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 octagon
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 square
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 pentagon
+	 circle
+	 circle
 	 rectangle
 	 circle
-	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
 	 circle
 	 circle
 	 circle
 	 circle
 	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 heptagon
+	 hexagon
 	 circle
 	 hexagon
-	 pentagon
 	 circle
-	 triangle
 	 circle
 	 circle
 	 circle
 	 circle
 	 circle
 	 hexagon
-	 rectangle
 	 circle
+	 pentagon
+	 circle
+	 circle
+	 pentagon
 	 square
 	 circle
 	 circle
 	 circle
 	 circle
 	 circle
+	 heptagon
+	 triangle
+	 circle
+	 heptagon
 	 circle
 	 circle
 	 circle
 	 circle
 	 circle
 	 circle
-	 circle
-	 circle
+	 hexagon
+	 square
 	 circle
 	 circle
 	 circle
 	 circle
 	 circle
 	 triangle
-	 circle
-	 circle
-	 circle
+	 heptagon
 	 circle
 	 circle
 	 pentagon
 	 circle
 	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
 	 square
 	 circle
 	 circle
-	 circle
-	 circle
-	 circle
-	 circle
+	 square
 	 circle
 	 circle
 	 triangle
@@ -1208,15 +1868,7 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 circle
-	 circle
-	 circle
 	 square
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
 	 circle
 	 circle
 	 circle
@@ -1225,25 +1877,48 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 heptagon
 	 circle
+	 heptagon
 	 circle
 	 circle
+	 circle
+	 square
+	 square
+	 triangle
+	 square
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 triangle
 	 circle
 	 hexagon
 	 square
 	 circle
 	 circle
 	 circle
-	 circle
-	 circle
-	 circle
-	 nonagon
-	 triangle
-	 circle
-	 circle
+	 square
 	 square
 	 circle
 	 triangle
-	 circle
 	 circle
 	 circle
 	 circle
@@ -1252,49 +1927,48 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 square
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 square
+	 circle
+	 hexagon
 	 triangle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 octagon
+	 circle
+	 circle
+	 triangle
+	 circle
+	 octagon
 	 circle
 	 circle
 	 pentagon
 	 circle
-	 square
-	 circle
-	 triangle
-	 circle
-	 circle
-	 circle
-	 heptagon
+	 octagon
 	 octagon
 	 circle
 	 circle
 	 circle
 	 circle
 	 circle
-	 hexagon
 	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 square
-	 circle
-	 octagon
-	 circle
-	 circle
-	 square
-	 circle
-	 circle
-	 circle
-	 square
 	 circle
 	 circle
 	 circle
@@ -1304,28 +1978,77 @@ Creation of grayscaled Mat succeeded
 	 square
 	 circle
 	 circle
-	 hexagon
-	 circle
-	 circle
 	 circle
 	 circle
 	 square
-	 triangle
+	 circle
+	 circle
 	 square
+	 circle
+	 circle
+	 circle
 	 triangle
 	 circle
 	 circle
+	 heptagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 square
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 square
+	 square
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
 	 heptagon
-	 pentagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 square
-	 square
 	 circle
 	 circle
 	 circle
@@ -1333,82 +2056,357 @@ Creation of grayscaled Mat succeeded
 	 circle
 	 circle
 	 circle
-	 triangle
-	 circle
-	 circle
-	 hexagon
 	 square
 	 hexagon
-	 hexagon
 	 circle
 	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 hexagon
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 pentagon
-	 circle
-	 hexagon
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 triangle
 	 square
 	 circle
 	 circle
-	 square
-	 hexagon
-	 triangle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 pentagon
-	 triangle
-	 hexagon
-	 circle
-	 circle
 	 circle
 	 circle
 	 circle
 	 circle
 	 circle
 	 hexagon
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
 	 square
 	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
 	 circle
 	 circle
 	 circle
 	 square
 	 nonagon
 	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 rectangle
+	 circle
+	 circle
+	 circle
 	 square
+	 circle
+	 triangle
+	 circle
+	 circle
+	 square
+	 square
+	 circle
+	 pentagon
+	 pentagon
+	 circle
+	 square
+	 rectangle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 heptagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 triangle
+	 circle
+	 hexagon
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 nonagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 square
+	 square
+	 circle
+	 circle
+	 heptagon
+	 circle
+	 pentagon
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 square
+	 triangle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 pentagon
+	 hexagon
+	 circle
+	 pentagon
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 heptagon
+	 circle
+	 pentagon
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 square
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 triangle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 triangle
+	 triangle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 square
+	 circle
+	 rectangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 triangle
+	 square
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 octagon
+	 circle
+	 circle
+	 circle
+	 circle
+	 rectangle
+	 hexagon
+	 square
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 circle
+	 square
+	 square
+	 triangle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 pentagon
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 hexagon
+	 circle
+	 square
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 heptagon
+	 circle
+	 triangle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 triangle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 circle
+	 circle
+	 circle
+	 square
+	 circle
+	 heptagon
+	 circle
+	 circle
+	 circle
 	 circle
 	 circle
 Image2 saved successfully
