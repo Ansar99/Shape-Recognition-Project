@@ -1,0 +1,8 @@
+Creation of grayscaled Mat succeeded
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+Image2 saved successfully

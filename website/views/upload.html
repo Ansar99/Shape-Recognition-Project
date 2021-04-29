@@ -1,0 +1,39 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <script src="https://vuejs.org/js/vue.js" ></script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" defer>
+    <link rel="stylesheet" type="text/css" href="css/upload.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Saira Stencil One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
+  </head>
+
+  <!-- kallar <body> med id "main" för att  komma åt alla element i Vue -->
+    <div id="main">
+      <body >
+
+        <header class="header">
+
+          <h1 id="headerText"> Welcome to ShapeItUp! </h1>
+        </header>
+
+        <div id="outputContainer">
+          <!--<p id="output">{{str}}</p>-->
+        </div>
+
+        </div>
+        <script> //When leaving site send delete for current images FIXME: GÖR SNYGGARE
+          window.addEventListener('beforeunload', function (e) { 
+            var paths = {
+              image : document.getElementById("inputPicture").getAttribute("src"),
+              shaped_image : document.getElementById("outputPicture").getAttribute("src")
+            };
+            socket.emit("delete image", paths);
+          });
+        </script>
+      </body>
+    </div>
+</html>
