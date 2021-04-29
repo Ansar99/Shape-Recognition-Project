@@ -6,7 +6,7 @@
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
-const io = require('socket.io')(http); //TA BORT ?
+const io = require('socket.io')(http); //FIXME: Remove ?
 const path = require('path');
 const crypto = require("crypto");
 const parse = require('node-html-parser').parse;
@@ -65,12 +65,14 @@ app.post(
     upload.single("file" /* name attribute of <file> element in your form */),
 
     (req, res) => {
-
-        var id = crypto.randomBytes(12).toString("hex"); //ANTON    
-        console.log(id);  //ANTON
+        
+        //Generates unique id for the image
+        var id = crypto.randomBytes(12).toString("hex");   
+        console.log(id); 
 
         const tempPath = req.file.path;
-        var targetPath = path.join(__dirname, "./public/images/" + id + ".jpg");  //ändrade till var ANTON
+        //Saves the uploaded image with unique id name
+        var targetPath = path.join(__dirname, "./public/images/" + id + ".jpg");
 
         // We simply check if the file is in .jpg format
         if (path.extname(req.file.originalname).toLowerCase() === ".jpg") {
@@ -79,7 +81,7 @@ app.post(
                 if (err) return handleError(err, res);
 
                 //execSync(Command) executes Command synchronously, that way exec(cat....) won't execute before the Go program
-                runGo.execSync("go run ../src/shapeitup/main.go public/images/" + id + ".jpg " + id + "  > output.txt",(error,stdout,stderr) => {  //ANTON SKITA I OUTPUT ?
+                runGo.execSync("go run ../src/shapeitup/main.go public/images/" + id + ".jpg " + id + "  > output.txt",(error,stdout,stderr) => {  //FIXME: Remove output ?
 
                 });
 
@@ -87,16 +89,16 @@ app.post(
                     if(err){
                        throw err;
                     }
-                 
+                    //Parses the upload.html file and adds the correct images (unique id name) to be displayed
                     const root = parse(html);
                     const outputContainer = root.querySelector('#outputContainer');
                     //outputContainer.appendChild('<img src="images/image.jpg" id="inputPicture">');
-                    //outputContainer.appendChild('<img src="shapedimage2.jpg" id="outputPicture">');  //VARFÖR FUNKAR INTE APPEND CHILD
+                    //outputContainer.appendChild('<img src="shapedimage2.jpg" id="outputPicture">');  //FIXME: appendChild would be better
                     outputContainer.set_content('<img src="images/' + id + '.jpg" id="inputPicture"><img src="shaped_' + id + '.jpg" id="outputPicture">');
                     res
                         .status(200)
                         .contentType("text/html")
-                        //.sendFile(path.join(__dirname, 'views/upload.html'))
+                        //Sends the edited upload.html as response
                         .send(root.toString())
                   });
 
