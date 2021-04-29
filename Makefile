@@ -9,7 +9,7 @@ GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
 BINARY_NAME=src/bin/
 
-DONTCOMPILE = ls -1 src/*/*.go | grep -v _test.go
+#DONTCOMPILE = ls -1 src/*/*.go | grep -v _test.go
 
 all: test build
 
@@ -20,7 +20,8 @@ run:
 	go run $(SRC)
 	
 test: 
-	$(GOTEST) -v ./...
+	go test  -v ./.../shapeitup
 	
 clean:
+	go clean -testcache
 	rm -f $(BINARY_NAME)

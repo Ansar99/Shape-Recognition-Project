@@ -81,10 +81,9 @@ app.post(
                 if (err) return handleError(err, res);
 
                 //execSync(Command) executes Command synchronously, that way exec(cat....) won't execute before the Go program
-                runGo.execSync("go run ../src/shapeitup/main.go public/images/" + id + ".jpg " + id + "  > output.txt",(error,stdout,stderr) => {  //FIXME: Remove output ?
+                runGo.execSync("go run ../src/shapeitup/main.go public/images/" + id + ".jpg " + "./shapedImages/shaped_" + id + ".jpg > output.txt",(error,stdout,stderr) => {  //FIXME: Remove output ?
 
                 });
-
                 fs.readFile('views/upload.html', 'utf8', (err,html)=>{
                     if(err){
                        throw err;
