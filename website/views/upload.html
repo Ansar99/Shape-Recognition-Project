@@ -25,6 +25,15 @@
         </div>
 
         </div>
+        <script> //When leaving site send delete for current images FIXME: GÖR SNYGGARE
+          window.addEventListener('beforeunload', function (e) { 
+            var paths = {
+              image : document.getElementById("inputPicture").getAttribute("src"),
+              shaped_image : document.getElementById("outputPicture").getAttribute("src")
+            };
+            socket.emit("delete image", paths);
+          });
+        </script>
       </body>
     </div>
 </html>

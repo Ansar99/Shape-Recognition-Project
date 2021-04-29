@@ -32,8 +32,6 @@ const vm = new Vue({
         extendSidebar: function(){
             let sidebar = document.getElementById("sideBar");
             sidebar.style.display="block";
-
-
         }
     }
 

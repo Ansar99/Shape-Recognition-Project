@@ -68,7 +68,7 @@ app.post(
         
         //Generates unique id for the image
         var id = crypto.randomBytes(12).toString("hex");   
-        console.log(id); 
+        console.log("Image id: " + id); 
 
         const tempPath = req.file.path;
         //Saves the uploaded image with unique id name
@@ -123,6 +123,23 @@ app.delete('/remove',function(req,res){
     console.log("app.Delete called!");
 });
 
+io.on('connection', (socket) => {
+    //Deletes the images when leaving a page
+    socket.on('delete image', (paths) => {  //FIXME: GÖR SNYGGARE
+        fs.unlink(path.join(__dirname, "./public/" + paths.image), (err => {
+            if (err) console.log(err);
+            else {
+                console.log("Deleted file: " + paths.image);
+            }
+          }));
+        fs.unlink(path.join(__dirname, "./shapedImages/" + paths.shaped_image), (err => {
+            if (err) console.log(err);
+            else {
+                console.log("Deleted file: " + paths.shaped_image);
+           }
+        }));
+    });
+});
 
 const server = http.listen(app.get('port'), function() {
     console.log('Server listening on port ' + app.get('port'));
