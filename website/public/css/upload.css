@@ -8,9 +8,8 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-image:
-        URL(https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png);
-
+    background-image:URL(../background.jpeg),URL(http://7-themes.com/data_images/out/2/6773146-awesome-shapes-wallpaper.jpg),URL(
+                    https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png);
 }
 /*
   ALLMÄNT
