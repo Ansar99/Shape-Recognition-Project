@@ -19,8 +19,9 @@ import (
 
 // A Result represents a shape and a point where text should be written.
 type Result struct {
-	Shape     string      // The shape
-	Textpoint image.Point // The point where text is placed
+	Shape     string        // The shape
+	Textpoint image.Point   // The point where text is placed
+	Vertices  []image.Point //ANTON
 }
 
 func main() {
@@ -28,6 +29,7 @@ func main() {
 		fmt.Println("usage: go run main.go selected_image.jpg resulting_image_save.jpg")
 		return
 	}
+	//runtime.GOMAXPROCS(4) //ANTON
 	start := time.Now()
 
 	imageloc := os.Args[1]
@@ -57,7 +59,7 @@ func main() {
 func markAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 	canny := gocv.NewMat()
 	gocv.Canny(shapeimg, &canny, 10, 10)
-
+	gocv.IMWrite("./shapedImages/4canny1010.jpg", canny) //ANTON
 	contours := gocv.FindContours(canny, gocv.RetrievalList, gocv.ChainApproxTC89L1)
 	imgpoints := contours.ToPoints()
 	amtOfJobs := contours.Size()
@@ -76,8 +78,15 @@ func markAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 
 	for j := 0; j < amtOfJobs; j = j + 2 {
 		shaperesult := <-result
+		if shaperesult.Shape == "bad" { //ANTON
+			continue
+		}
 		red := color.RGBA{255, 0, 0, 0}
 		gocv.PutText(&shapeimg, shaperesult.Shape, shaperesult.Textpoint, 2, 0.75, red, 1)
+		for _, x := range shaperesult.Vertices { //ANTON
+			gocv.Circle(&shapeimg, x, 5, red, 10)
+		}
+
 		//fmt.Printf("\t %s\n", shaperesult.Shape)
 	}
 
@@ -104,11 +113,17 @@ func worker(shapeimg gocv.Mat, contours gocv.PointsVector, imgpoints [][]image.P
 // returns a Result containg the shape and a point for text.
 func detectshape(pvr gocv.PointVector) Result {
 	shape := "unidentified shape"
+	//Här borde man kunna sortera ut borde göra i förhållande bildstorleken, ANTON
+	fmt.Println(len(pvr.ToPoints())) //ANTON
 	shapeperimeter := gocv.ArcLength(pvr, true)
+	if shapeperimeter < 200 { //ANTON
+		var resultbad Result
+		resultbad.Shape = "bad"
+		return resultbad
+	}
 	shapeguess := gocv.ApproxPolyDP(pvr, 0.03*shapeperimeter, true)
-
 	shapeguessRightType := shapeguess.ToPoints()
-
+	fmt.Println(shapeguessRightType)
 	textpoint := shapeguessRightType[0]
 	textpoint.X = textpoint.X - 5
 	vertices := len(shapeguessRightType)
@@ -138,7 +153,7 @@ func detectshape(pvr gocv.PointVector) Result {
 	} else if vertices == 7 {
 		shape = "heptagon"
 	} else if vertices == 8 {
-		if isOctagon(shapeguessRightType) {
+		if isOctagon(shapeguessRightType, shapeperimeter) {
 			shape = "octagon"
 		} else {
 			shape = "circle"
@@ -152,7 +167,7 @@ func detectshape(pvr gocv.PointVector) Result {
 	var result Result
 	result.Shape = shape
 	result.Textpoint = textpoint
-
+	result.Vertices = shapeguessRightType
 	return result
 }
 
@@ -164,17 +179,21 @@ func calculateDistanceBetweenTwoPoints(point1 image.Point, point2 image.Point) f
 
 // isOctagon checks wether a shape is a circle or an octagon
 // returns true if its an octagon, else false.
-func isOctagon(points []image.Point) bool {
-	var pointsArr [8]int
-	for i := 0; i < 8; i++ {
-		for _, v := range pointsArr {
-			if v == points[i].X {
-				return true
-			}
+func isOctagon(points []image.Point, shapeperimeter float64) bool {
+	length := len(points)
+	var circumference float64 = 0
+	for i, v := range points {
+		if i < length-1 {
+			circumference += calculateDistanceBetweenTwoPoints(v, points[i+1])
+		} else {
+			circumference += calculateDistanceBetweenTwoPoints(v, points[0])
 		}
-		pointsArr[i] = points[i].X
 	}
-	return false
+	if shapeperimeter-circumference < shapeperimeter*0.02 {
+		return true
+	} else {
+		return false
+	}
 }
 
 // imageToGrayScaleMat converts a path of an image to a gocv.Mat, grayscales it and blurs it.
@@ -185,13 +204,17 @@ func imageToGrayscaleMat(imgname string) (gocv.Mat, error) {
 	if img.Empty() {
 		return gocv.Mat{}, errors.New("image img in imageToGrayscaleMat is empty")
 	}
+	gocv.IMWrite("./shapedImages/1greyimage.jpg", img) //ANTON
 	gocv.MedianBlur(img, &img, 11)
-
+	gocv.IMWrite("./shapedImages/2blurimage.jpg", img) //ANTON
 	shapeimg := gocv.NewMat()
 	gocv.CvtColor(img, &shapeimg, gocv.ColorGrayToBGR)
+	gocv.IMWrite("./shapedImages/3greyblurimage.jpg", shapeimg) //ANTON
 	if shapeimg.Empty() {
 		return gocv.Mat{}, errors.New("image shapeimg in imageToGrayscaleMat is empty")
 	}
 
 	return shapeimg, nil
 }
+
+///go run main.go ./images/image.jpg ./shapedImages/shapedimage.jpg ANTON
