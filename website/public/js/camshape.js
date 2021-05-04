@@ -9,18 +9,6 @@ const vm = new Vue({
     },
 
     // Vue cycle created: all functions are available after the vue object is created.
-    created: function() {
-
-        // Receive output message from server and bind it to this.str
-        window.addEventListener('beforeunload',function(){
-            var paths = {
-                image : document.getElementById("inputPicture").getAttribute("src"),
-                shaped_image : document.getElementById("outputPicture").getAttribute("src")
-            };
-            socket.emit("delete image", paths);
-        });
-    },
-
     methods:{
         backToMain: function(){
             window:history.go(-1);

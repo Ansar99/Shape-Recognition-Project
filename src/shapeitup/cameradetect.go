@@ -30,7 +30,11 @@ func main() {
 		}
 		updatedshapeimg := markAndFindShapes(shapeimg)
 		window.IMShow(updatedshapeimg)
-		window.WaitKey(1)
+		//window.WaitKey(1)
+
+		if window.WaitKey(1) >= 0 {
+            break
+        }
 	}
 }
 

@@ -15,7 +15,6 @@ const crypto = require("crypto");
 const parse = require('node-html-parser').parse;
 
 const runGo  = require('child_process');
-const cat  = require('child_process');
 
 // Require filesystem
 const fs = require('fs');
@@ -74,8 +73,8 @@ app.post(
     (req, res) => {
         
         //Generates unique id for the image
-        var id = crypto.randomBytes(12).toString("hex");   
-        console.log("Image id: " + id); 
+        var id = crypto.randomBytes(12).toString("hex");
+        console.log("Image id: " + id);
 
         const tempPath = req.file.path;
         //Saves the uploaded image with unique id name
@@ -150,7 +149,8 @@ io.on('connection', (socket) => {
         });
     })
     socket.on("stopCamera", function(){
-        pid.exit();
+        console.log("HELLOOOOOO");
+        pid.kill();
     })
 });
 
