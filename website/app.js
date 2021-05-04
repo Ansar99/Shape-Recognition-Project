@@ -2,6 +2,9 @@
 /* eslint-env node */
 'use strict';
 
+
+var pid;
+
 // Require express, socket.io, vue, path and child_process
 const express = require('express');
 const app = express();
@@ -42,6 +45,10 @@ app.get('/', function(req, res) {
 // Serve upload.html as /upload
 app.get('/upload', function(req, res) {
     res.sendFile(path.join(__dirname, 'views/upload.html'));
+})
+
+app.get('/camera', function(req, res) {
+    res.sendFile(path.join(__dirname, 'views/camshape.html'));
 })
 
 // Error handler for the post request.
@@ -138,6 +145,13 @@ io.on('connection', (socket) => {
            }
         }));
     });
+    socket.on("startCamera", function(){
+        pid = runGo.exec("go run ../src/shapeitup/cameradetect.go", (error,stdout,stderr) => {
+        });
+    })
+    socket.on("stopCamera", function(){
+        pid.exit();
+    })
 });
 
 const server = http.listen(app.get('port'), function() {
