@@ -66,7 +66,7 @@ func markAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 
 	jobs := make(chan int, amtOfJobs)
 	result := make(chan Result, amtOfJobs)
-	fmt.Println(runtime.NumCPU())
+	//fmt.Println(runtime.NumCPU())
 	for amountOfRoutines := 0; amountOfRoutines < runtime.NumCPU()-1; amountOfRoutines++ {
 		go worker(shapeimg, contours, imgpoints, jobs, result)
 	}
@@ -114,7 +114,6 @@ func worker(shapeimg gocv.Mat, contours gocv.PointsVector, imgpoints [][]image.P
 func detectshape(pvr gocv.PointVector) Result {
 	shape := "unidentified shape"
 	//Här borde man kunna sortera ut borde göra i förhållande bildstorleken, ANTON
-	fmt.Println(len(pvr.ToPoints())) //ANTON
 	shapeperimeter := gocv.ArcLength(pvr, true)
 	if shapeperimeter < 200 { //ANTON
 		var resultbad Result
@@ -123,29 +122,13 @@ func detectshape(pvr gocv.PointVector) Result {
 	}
 	shapeguess := gocv.ApproxPolyDP(pvr, 0.03*shapeperimeter, true)
 	shapeguessRightType := shapeguess.ToPoints()
-	fmt.Println(shapeguessRightType)
 	textpoint := shapeguessRightType[0]
 	textpoint.X = textpoint.X - 5
 	vertices := len(shapeguessRightType)
 	if vertices == 3 {
 		shape = "triangle"
 	} else if vertices == 4 {
-		// Points (X,Y) of the rectangle/square
-		p1 := shapeguessRightType[0]
-		p2 := shapeguessRightType[1]
-		p3 := shapeguessRightType[2]
-		p4 := shapeguessRightType[3]
-
-		// If difference in distances is < 10, then its a square, otherwise rectangle
-		p1p2 := calculateDistanceBetweenTwoPoints(p1, p2)
-		p2p3 := calculateDistanceBetweenTwoPoints(p2, p3)
-		p3p4 := calculateDistanceBetweenTwoPoints(p3, p4)
-		p4p1 := calculateDistanceBetweenTwoPoints(p4, p1)
-		if (p1p2-p2p3) < 10 && (p2p3-p3p4) < 10 && (p4p1-p1p2) < 10 {
-			shape = "square"
-		} else {
-			shape = "rectangle"
-		}
+		shape = fourVertices(shapeguessRightType) //ANTON
 	} else if vertices == 5 {
 		shape = "pentagon"
 	} else if vertices == 6 {
@@ -153,15 +136,12 @@ func detectshape(pvr gocv.PointVector) Result {
 	} else if vertices == 7 {
 		shape = "heptagon"
 	} else if vertices == 8 {
-		if isOctagon(shapeguessRightType, shapeperimeter) {
-			shape = "octagon"
-		} else {
-			shape = "circle"
-		}
+		shape = isOctagon(shapeguessRightType, shapeperimeter)
+		fmt.Println(shape)
 	} else if vertices == 9 {
 		shape = "nonagon"
 	} else {
-		shape = "circle"
+		shape = "unknown"
 	} // If more shapes needs to be detected, add them here.
 
 	var result Result
@@ -177,9 +157,77 @@ func calculateDistanceBetweenTwoPoints(point1 image.Point, point2 image.Point) f
 	return math.Sqrt(float64((point2.X-point1.X)*(point2.X-point1.X)) + float64((point2.Y-point1.Y)*(point2.Y-point1.Y)))
 }
 
+func threePointAngle(pointA image.Point, pointB image.Point, pointC image.Point) float64 {
+	return math.Atan2(float64(pointC.X-pointA.X), float64(pointC.Y-pointA.Y)) - math.Atan2(float64(pointB.X-pointA.X), float64(pointB.Y-pointA.Y))
+}
+
+func dotAngle(pointA image.Point, pointB image.Point, pointC image.Point) float64 {
+	a := [2]float64{float64(pointA.X - pointB.X), float64(pointA.Y - pointB.Y)} //FULt ändra ANTON
+	b := [2]float64{float64(pointA.X - pointC.X), float64(pointA.Y - pointC.Y)}
+	return math.Acos((a[0]*b[0] + a[1]*b[1]) / (calculateDistanceBetweenTwoPoints(pointA, pointB) * calculateDistanceBetweenTwoPoints(pointA, pointC)))
+}
+
+func parallell(pointA image.Point, pointB image.Point, pointC image.Point, pointD image.Point) bool {
+	kA := float64(pointA.Y-pointB.Y) / float64(pointA.X-pointB.X)
+	kB := float64(pointC.Y-pointD.Y) / float64(pointC.X-pointD.X)
+	return math.Abs(kA-kB) < 0.1 //FIXME: Vettigt nr
+}
+
+func fourVertices(points []image.Point) string { //ANTON
+	// Points (X,Y) of the qudriangle
+	p1 := points[0]
+	p2 := points[1]
+	p3 := points[2]
+	p4 := points[3]
+
+	// Distance between points in quadriangle
+	p1p2 := calculateDistanceBetweenTwoPoints(p1, p2)
+	p2p3 := calculateDistanceBetweenTwoPoints(p2, p3)
+	p3p4 := calculateDistanceBetweenTwoPoints(p3, p4)
+	p4p1 := calculateDistanceBetweenTwoPoints(p4, p1)
+
+	// Angles
+	p1A := dotAngle(p1, p2, p4)
+	//p2A := dotAngle(p2, p1, p3)
+	p3A := dotAngle(p3, p2, p4)
+	//p4A := dotAngle(p4, p3, p1)
+
+	if math.Abs(p1p2-p2p3) < 10 && math.Abs(p2p3-p3p4) < 10 && math.Abs(p4p1-p1p2) < 10 {
+		return "square" //ANTON När returnerna romb ??
+	} else if math.Abs(p1p2-p3p4) < 10 || math.Abs(p2p3-p4p1) < 10 {
+		if math.Abs(p1A-p3A) < math.Pi/30 { //equal angle on opposite sides
+			if math.Abs(p1A-math.Pi/2) < math.Pi/30 { //angle ~= 90
+				return "rectangle"
+			} else {
+				return "parallelogram"
+			}
+		} else {
+			return "paralleltrapets" //Hur fånga ?
+		}
+	} else if parallell(p1, p2, p3, p4) || parallell(p2, p3, p1, p4) {
+		return "paralleltrapts"
+	} else {
+		return "quadriangle"
+	}
+}
+
 // isOctagon checks wether a shape is a circle or an octagon
 // returns true if its an octagon, else false.
-func isOctagon(points []image.Point, shapeperimeter float64) bool {
+func isOctagon(points []image.Point, shapeperimeter float64) string {
+	p1 := points[0]
+	p2 := points[1]
+	p3 := points[2]
+	p4 := points[3]
+	p5 := points[4]
+	p6 := points[5]
+	p7 := points[6]
+	p8 := points[7]
+
+	p1p5 := calculateDistanceBetweenTwoPoints(p1, p5)
+	p2p6 := calculateDistanceBetweenTwoPoints(p2, p6)
+	p3p7 := calculateDistanceBetweenTwoPoints(p3, p7)
+	p4p8 := calculateDistanceBetweenTwoPoints(p4, p8)
+
 	length := len(points)
 	var circumference float64 = 0
 	for i, v := range points {
@@ -189,10 +237,14 @@ func isOctagon(points []image.Point, shapeperimeter float64) bool {
 			circumference += calculateDistanceBetweenTwoPoints(v, points[0])
 		}
 	}
-	if shapeperimeter-circumference < shapeperimeter*0.02 {
-		return true
+	fmt.Println(shapeperimeter)
+	fmt.Println(circumference)
+	if math.Abs(shapeperimeter-circumference) < shapeperimeter*0.032 { //FIXME: 0.02 needs to be tested 0.032 ?
+		return "octagon"
+	} else if math.Abs(p1p5-p2p6) > 10 && math.Abs(p2p6-p3p7) > 10 && math.Abs(p3p7-p4p8) > 10 {
+		return "ovale"
 	} else {
-		return false
+		return "circle"
 	}
 }
 
