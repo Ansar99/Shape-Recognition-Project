@@ -1,0 +1,32 @@
+<!DOCTYPE>
+<html>
+
+  <head>
+    <script src="https://vuejs.org/js/vue.js" ></script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="js/game.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" defer>
+    <link rel="stylesheet" type="text/css" href="css/game.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Saira Stencil One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
+  </head>
+
+  <div id="main">
+    <body>
+
+      <header class="header">
+        <h1 id="headerText"> Welcome to ShapeItUp! </h1>
+      </header>
+      <button v-on:click="backToMain">&#8617;</button>
+      <button id="clear" type="button">Clear</button>
+      <button id="save" type="button">Save</button>
+       <div class="right-block">
+        <canvas id="paint-canvas" width="640" height="400"></canvas>
+      </div>
+
+    </body>
+  </div>
+
+
+</html>

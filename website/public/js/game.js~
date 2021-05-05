@@ -1,0 +1,55 @@
+'use strict';
+const socket = io();
+
+// The vue instance
+const vm = new Vue({
+    el:"#main",
+    data:{
+
+    },
+
+    // Vue cycle created: all functions are available after the vue object is created.
+    created: function() {
+
+        window.onload = function(){
+            let canvas = document.getElementById("myCanvas");
+            let ctx = canvas.getContext("2d");
+
+            let width = canvas.width;
+            let height = canvas.height;
+            console.log("width:" + width +" height:"+ height);
+
+            for (let i = 1; i <= 3; i = i+ 1){
+                let p1 = width/3;
+                let p2 = height/3;
+                ctx.moveTo(i*p1, 0);
+                ctx.lineTo(i*p1, height);
+                ctx.stroke();
+
+                ctx.moveTo(0,i*p2);
+                ctx.lineTo(width,i*p2);
+                ctx.stroke();
+            }
+
+
+        }
+    },
+
+    methods:{
+        // Retracts the sidebar
+        retractSidebar: function(){
+            let sidebar = document.getElementById("sideBar");
+            sidebar.style.display="none";
+
+        },
+        // Extends the sidebar
+        extendSidebar: function(){
+            let sidebar = document.getElementById("sideBar");
+            sidebar.style.display="block";
+        },
+        backToMain: function(){
+            window:history.go(-1);
+        }
+    }
+
+})

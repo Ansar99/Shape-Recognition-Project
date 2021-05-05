@@ -50,6 +50,11 @@ app.get('/camera', function(req, res) {
     res.sendFile(path.join(__dirname, 'views/camshape.html'));
 })
 
+app.get('/game', function(req, res) {
+    res.sendFile(path.join(__dirname, 'views/game.html'));
+})
+
+
 // Error handler for the post request.
 const handleError = (err, res) => {
     res
