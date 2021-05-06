@@ -46,6 +46,10 @@ app.get('/upload', function(req, res) {
     res.sendFile(path.join(__dirname, 'views/upload.html'));
 })
 
+app.get('/gameupload', function(req, res) {
+    res.sendFile(path.join(__dirname, 'views/gameupload.html'));
+})
+
 app.get('/camera', function(req, res) {
     res.sendFile(path.join(__dirname, 'views/camshape.html'));
 })
@@ -67,6 +71,7 @@ const upload = multer({
     dest: "images/"
     // Might also want to set some limits: https://github.com/expressjs/multer#limits
 });
+
 
 // Handles a post request
 app.post(
@@ -128,6 +133,76 @@ app.post(
     }
 );
 
+// Handles a post request
+app.post(
+    "/gameupload",
+
+    //Accepts a single file which will be stored in req.file
+    upload.single("file" /* name attribute of <file> element in your form */),
+
+    (req, res) => {
+
+        //Generates unique id for the image
+        var id = crypto.randomBytes(12).toString("hex");
+        console.log("Image id: " + id);
+
+        const tempPath = req.file.path;
+        //Saves the uploaded image with unique id name
+        var targetPath = path.join(__dirname, "./public/images/" + id + ".jpg");
+
+        // We simply check if the file is in .jpg format
+        if (path.extname(req.file.originalname).toLowerCase() === ".jpg") {
+
+            fs.rename(tempPath, targetPath, err => {
+                if (err) return handleError(err, res);
+
+                //execSync(Command) executes Command synchronously, that way exec(cat....) won't execute before the Go program
+                runGo.execSync("go run ../src/shapeitup/main.go public/images/" + id + ".jpg " + "./shapedImages/shaped_" + id + ".jpg > output.txt",(error,stdout,stderr) => {  //FIXME: Remove output ?
+
+                });
+
+                runGo.exec("cat output.txt", (error,stdout,stderr) =>{
+                    console.log(stdout);
+                    io.on('connection', (socket) =>{
+                        socket.emit("guesses", {
+                            guesses:stdout
+
+                        });
+                    })
+                });
+                fs.readFile('views/gameupload.html', 'utf8', (err,html)=>{
+                    if(err){
+                       throw err;
+                    }
+                    //Parses the upload.html file and adds the correct images (unique id name) to be displayed
+                    const root = parse(html);
+                    const outputContainer = root.querySelector('#outputContainer');
+                    //outputContainer.appendChild('<img src="images/image.jpg" id="inputPicture">');
+                    //outputContainer.appendChild('<img src="shapedimage2.jpg" id="outputPicture">');  //FIXME: appendChild would be better
+                   // outputContainer.set_content('<img src="images/' + id + '.jpg" id="inputPicture"><img src="shaped_' + id + '.jpg" id="outputPicture">');
+                    res
+                        .status(200)
+                        .contentType("text/html")
+                        //Sends the edited upload.html as response
+                        .send(root.toString())
+                  });
+
+            });
+        }
+        // If it's not we return an error message
+        else {
+            fs.unlink(tempPath, err => {
+                if (err) return handleError(err, res);
+
+                res
+                    .status(403)
+                    .contentType("text/plain")
+                    .end("Only .jpg files are allowed!");
+            });
+        }
+    }
+);
+
 // Might not need this request
 app.delete('/remove',function(req,res){
     console.log("app.Delete called!");
@@ -141,22 +216,20 @@ io.on('connection', (socket) => {
             else {
                 console.log("Deleted file: " + paths.image);
             }
-          }));
+        }));
         fs.unlink(path.join(__dirname, "./shapedImages/" + paths.shaped_image), (err => {
             if (err) console.log(err);
             else {
                 console.log("Deleted file: " + paths.shaped_image);
-           }
+            }
         }));
     });
     socket.on("startCamera", function(){
         pid = runGo.exec("go run ../src/shapeitup/cameradetect.go", (error,stdout,stderr) => {
         });
     })
-    socket.on("stopCamera", function(){
-        console.log("HELLOOOOOO");
-        pid.kill();
-    })
+
+
 });
 
 const server = http.listen(app.get('port'), function() {

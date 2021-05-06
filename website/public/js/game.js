@@ -5,79 +5,35 @@ const socket = io();
 const vm = new Vue({
     el:"#main",
     data:{
-        shapes: ["circle", "square", "rectangle", "triangle", "pentagon","hexagon","heptagon","octagon","nonagon"],
+        clueAndShape: {
+            1:["circle", "Hint: I have no edges..."],
+            2:["triangle", "Hint: I can be used to create all standard polygons"],
+            3:["rectangle","Hint: I am a special case of a parallelogram"],
+            4:["square","Hint: I am one side of the six side of a Minecraft block"],
+            5:["pentagon","Hint: My shape is the same as a military base"],
+            6:["hexagon","Hint: I am the shape of a honeycomb cell"]
+        },
+        correctShape:"Something went wrong!",
+        guesses:""
+
     },
 
     // Vue cycle created: all functions are available after the vue object is created.
     created: function() {
-        console.log(this.shapes);
-        window.onload = function () {
-
-            // Definitions
-            var canvas = document.getElementById("paint-canvas");
-            var context = canvas.getContext("2d");
-            var boundings = canvas.getBoundingClientRect();
-
-            // Specifications
-            var mouseX = 0;
-            var mouseY = 0;
-            context.strokeStyle = 'black'; // initial brush color
-            context.lineWidth = 2; // initial brush width
-            var isDrawing = false;
+        this.correctShape = this.clueAndShape[Math.floor(Math.random() * 6) + 1];
+        this.correctShape.join("");
 
 
+        socket.on("guesses", function(g){
+            this.guesses = g.guesses;
 
-            // Mouse Down Event
-            canvas.addEventListener('mousedown', function(event) {
-                setMouseCoordinates(event);
-                isDrawing = true;
 
-                // Start Drawing
-                context.beginPath();
-                context.moveTo(mouseX, mouseY);
-            });
+        }.bind(this));
 
-            // Mouse Move Event
-            canvas.addEventListener('mousemove', function(event) {
-                setMouseCoordinates(event);
+        socket.emit("correctAnswer", {
+            rightGuess: this.correctShape
+        });
 
-                if(isDrawing){
-                    context.lineTo(mouseX, mouseY);
-                    context.stroke();
-                }
-            });
-
-            // Mouse Up Event
-            canvas.addEventListener('mouseup', function(event) {
-                setMouseCoordinates(event);
-                isDrawing = false;
-            });
-
-            // Handle Mouse Coordinates
-            function setMouseCoordinates(event) {
-                mouseX = event.clientX - boundings.left;
-                mouseY = event.clientY - boundings.top;
-            }
-
-            // Handle Clear Button
-            var clearButton = document.getElementById('clear');
-
-            clearButton.addEventListener('click', function() {
-                context.clearRect(0, 0, canvas.width, canvas.height);
-            });
-
-            // Handle Save Button
-            var saveButton = document.getElementById('save');
-
-            saveButton.addEventListener('click', function() {
-                var imageName = prompt('Please enter image name');
-                var canvasDataURL = canvas.toDataURL('image/jpeg',1.0);
-                var a = document.createElement('a');
-                a.href = canvasDataURL;
-                a.download = imageName || 'drawing';
-                a.click();
-            });
-        };
 
 
     },
@@ -96,6 +52,13 @@ const vm = new Vue({
         },
         backToMain: function(){
             window:history.go(-1);
+        },
+        sendGuess: function(){
+            console.log("HÄR ÄR JAG");
+            socket.emit("forwardGuesses", {
+                guess:this.guesses,
+                correcAnswer: this.correctShape
+            });
         }
     }
 

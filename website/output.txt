@@ -1,3 +1,6 @@
-Creation of grayscaled Mat succeeded
-4
-./shapedImages/shaped_dde6a62e956fdfc7222462f7.jpg saved successfully
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
+	 circle
