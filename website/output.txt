@@ -1,6 +1,3 @@
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
-	 circle
+square
+rectangle
+circle

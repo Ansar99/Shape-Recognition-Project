@@ -10,7 +10,7 @@ const vm = new Vue({
             2:["triangle", "Hint: I can be used to create all standard polygons"],
             3:["rectangle","Hint: I am a special case of a parallelogram"],
             4:["square","Hint: I am one side of the six side of a Minecraft block"],
-            5:["pentagon","Hint: My shape is the same as a military base"],
+            5:["pentagon","Hint: My shape is the same as a military base in the US"],
             6:["hexagon","Hint: I am the shape of a honeycomb cell"]
         },
         correctShape:"Something went wrong!",
@@ -20,21 +20,19 @@ const vm = new Vue({
 
     // Vue cycle created: all functions are available after the vue object is created.
     created: function() {
+
         this.correctShape = this.clueAndShape[Math.floor(Math.random() * 6) + 1];
-        this.correctShape.join("");
+        console.log("CorrectShape in game.js 24 " + this.correctShape[1]);
 
 
         socket.on("guesses", function(g){
             this.guesses = g.guesses;
 
-
         }.bind(this));
 
-        socket.emit("correctAnswer", {
+        socket.emit("correctAnswerToServer", {
             rightGuess: this.correctShape
         });
-
-
 
     },
 

@@ -5,7 +5,7 @@
     <script src="/socket.io/socket.io.js" defer></script>
     <script src="js/gameupload.js" defer></script>
     <link rel="stylesheet" type="text/css" href="css/reset.css" defer>
-    <link rel="stylesheet" type="text/css" href="css/upload.css">
+    <link rel="stylesheet" type="text/css" href="css/gameupload.css">
 
     <link href="https://fonts.googleapis.com/css?family=Saira Stencil One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
@@ -23,8 +23,10 @@
 
 
         <div id="result">
-          <h2>The right answer is: {{correctShape}}</h2>
-          <h2>You answer is = {{guesses}}</h2>
+          <h2>1.{{correctShape}} </h2>
+          <h2>2.{{guesses}}</h2>
+          <h2>3.{{status}} </h2>
+          <h2>{{failed}}</h2>
         </div>
 
     </div>

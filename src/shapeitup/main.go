@@ -37,13 +37,13 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error while creating grayscaled Mat: %v", err)
 	} else {
-		fmt.Println("Creation of grayscaled Mat succeeded")
+		//fmt.Println("Creation of grayscaled Mat succeeded")
 	}
 
 	updatedshapeimg := markAndFindShapes(shapeimg)
 	shapeimgconversion := gocv.IMWrite(saveResultAs, updatedshapeimg)
 	if shapeimgconversion {
-		fmt.Println(saveResultAs + " saved successfully")
+		//fmt.Println(saveResultAs + " saved successfully")
 	} else {
 		log.Fatalf("Error in converting" + saveResultAs)
 	}
@@ -64,7 +64,7 @@ func markAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 
 	jobs := make(chan int, amtOfJobs)
 	result := make(chan Result, amtOfJobs)
-	fmt.Println(runtime.NumCPU())
+	//fmt.Println(runtime.NumCPU())
 	for amountOfRoutines := 0; amountOfRoutines < runtime.NumCPU()-1; amountOfRoutines++ {
 		go worker(shapeimg, contours, imgpoints, jobs, result)
 	}
@@ -78,7 +78,7 @@ func markAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 		shaperesult := <-result
 		red := color.RGBA{255, 0, 0, 0}
 		gocv.PutText(&shapeimg, shaperesult.Shape, shaperesult.Textpoint, 2, 0.75, red, 1)
-		//fmt.Printf("\t %s\n", shaperesult.Shape)
+		fmt.Printf("%s\n", shaperesult.Shape)
 	}
 
 	gocv.DrawContours(&shapeimg, contours, -1, color.RGBA{0, 0, 255, 0}, 1)

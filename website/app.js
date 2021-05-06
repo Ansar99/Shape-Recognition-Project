@@ -4,6 +4,7 @@
 
 
 var pid;
+var correctShape = "";
 
 // Require express, socket.io, vue, path and child_process
 const express = require('express');
@@ -162,13 +163,19 @@ app.post(
                 });
 
                 runGo.exec("cat output.txt", (error,stdout,stderr) =>{
-                    console.log(stdout);
+
+
                     io.on('connection', (socket) =>{
                         socket.emit("guesses", {
                             guesses:stdout
 
                         });
+
+                        socket.emit("correctAnswerToClient", {
+                            rightGuess: correctShape
+                        });
                     })
+
                 });
                 fs.readFile('views/gameupload.html', 'utf8', (err,html)=>{
                     if(err){
@@ -185,7 +192,7 @@ app.post(
                         .contentType("text/html")
                         //Sends the edited upload.html as response
                         .send(root.toString())
-                  });
+                });
 
             });
         }
@@ -208,6 +215,7 @@ app.delete('/remove',function(req,res){
     console.log("app.Delete called!");
 });
 
+
 io.on('connection', (socket) => {
     //Deletes the images when leaving a page
     socket.on('delete image', (paths) => {  //FIXME: GÖR SNYGGARE
@@ -224,11 +232,15 @@ io.on('connection', (socket) => {
             }
         }));
     });
+
     socket.on("startCamera", function(){
         pid = runGo.exec("go run ../src/shapeitup/cameradetect.go", (error,stdout,stderr) => {
         });
-    })
+    });
 
+    socket.on("correctAnswerToServer", function(correct){
+        correctShape = correct.rightGuess;
+    });
 
 });
 
