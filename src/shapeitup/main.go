@@ -60,23 +60,23 @@ func markAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 	canny := gocv.NewMat()
 	gocv.Canny(shapeimg, &canny, 10, 10)
 	gocv.IMWrite("./shapedImages/4canny1010.jpg", canny) //ANTON
-	contours := gocv.FindContours(canny, gocv.RetrievalList, gocv.ChainApproxTC89L1)
+	contours := gocv.FindContours(canny, gocv.RetrievalExternal, gocv.ChainApproxTC89L1)
 	imgpoints := contours.ToPoints()
 	amtOfJobs := contours.Size()
 
 	jobs := make(chan int, amtOfJobs)
 	result := make(chan Result, amtOfJobs)
-	//fmt.Println(runtime.NumCPU())
+
 	for amountOfRoutines := 0; amountOfRoutines < runtime.NumCPU()-1; amountOfRoutines++ {
 		go worker(shapeimg, contours, imgpoints, jobs, result)
 	}
 
-	for i := 0; i < amtOfJobs; i++ { // i = i + 2 TODO
+	for i := 0; i < amtOfJobs; i++ {
 		jobs <- i
 	}
 	close(jobs)
 
-	for j := 0; j < amtOfJobs; j++ { // j = j + 2 TODO
+	for j := 0; j < amtOfJobs; j++ {
 		shaperesult := <-result
 		if shaperesult.Shape == "bad" { //ANTON
 			continue
@@ -84,14 +84,11 @@ func markAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 		red := color.RGBA{255, 0, 0, 0}
 		gocv.PutText(&shapeimg, shaperesult.Shape, shaperesult.Textpoint, 2, 0.75, red, 1)
 		for i, x := range shaperesult.Vertices { //ANTON
-			//gocv.Circle(&shapeimg, x, 5, red, 10)
-			//gocv.PutText(&shapeimg, fmt.Sprint(i), x, 2, 0.75, red, 1)
+			//gocv.PutText(&shapeimg, fmt.Sprint(i), x, 2, 1, red, 1)
 			if i < len(shaperesult.Vertices)-1 {
 				gocv.Line(&shapeimg, x, shaperesult.Vertices[(i+4)%len(shaperesult.Vertices)], red, 2)
 			}
 		}
-
-		//fmt.Printf("\t %s\n", shaperesult.Shape)
 	}
 
 	gocv.DrawContours(&shapeimg, contours, -1, color.RGBA{0, 0, 255, 0}, 1)
@@ -232,6 +229,8 @@ func isOctagon(points []image.Point, shapeperimeter float64) string {
 	p3p7 := calculateDistanceBetweenTwoPoints(p3, p7)
 	p4p8 := calculateDistanceBetweenTwoPoints(p4, p8)
 
+	omkrets := (p1p5 + p2p6 + p3p7 + p4p8) / 4 * math.Pi
+
 	length := len(points)
 	var circumference float64 = 0
 	for i, v := range points {
@@ -242,19 +241,22 @@ func isOctagon(points []image.Point, shapeperimeter float64) string {
 		}
 	}
 
-	if math.Abs(shapeperimeter-circumference) < shapeperimeter*0.01 { //FIXME: 0.02 needs to be tested 0.032 ?
-		fmt.Println("shapeperimeter for octagon: ", shapeperimeter)
-		fmt.Println("circumference for octagon: ", circumference)
-		return "octagon"
-	} else if math.Abs(p1p5-p2p6) > 10 && math.Abs(p2p6-p3p7) > 10 && math.Abs(p3p7-p4p8) > 10 {
+	if math.Abs(p1p5-p2p6) > 10 && math.Abs(p2p6-p3p7) > 10 && math.Abs(p3p7-p4p8) > 10 { //FIXME: 0.02 needs to be tested 0.032 ?
 		fmt.Println("shapeperimeter for ovale: ", shapeperimeter)
 		fmt.Println("circumference for ovale: ", circumference)
 		return "ovale"
-	} else {
+	} else if math.Abs(shapeperimeter-omkrets) < shapeperimeter*0.008 {
 		fmt.Println("shapeperimeter for circle: ", shapeperimeter)
 		fmt.Println("circumference for circle: ", circumference)
+		fmt.Println("Omkrets för circle är :", omkrets)
 		return "circle"
+	} else {
+		fmt.Println("shapeperimeter for octagon: ", shapeperimeter)
+		fmt.Println("circumference for octagon: ", circumference)
+		fmt.Println("Omkrets för octagon :", omkrets)
+		return "octagon"
 	}
+
 }
 
 // imageToGrayScaleMat converts a path of an image to a gocv.Mat, grayscales it and blurs it.
