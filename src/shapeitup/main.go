@@ -71,20 +71,24 @@ func markAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 		go worker(shapeimg, contours, imgpoints, jobs, result)
 	}
 
-	for i := 0; i < amtOfJobs; i = i + 2 {
+	for i := 0; i < amtOfJobs; i++ { // i = i + 2 TODO
 		jobs <- i
 	}
 	close(jobs)
 
-	for j := 0; j < amtOfJobs; j = j + 2 {
+	for j := 0; j < amtOfJobs; j++ { // j = j + 2 TODO
 		shaperesult := <-result
 		if shaperesult.Shape == "bad" { //ANTON
 			continue
 		}
 		red := color.RGBA{255, 0, 0, 0}
 		gocv.PutText(&shapeimg, shaperesult.Shape, shaperesult.Textpoint, 2, 0.75, red, 1)
-		for _, x := range shaperesult.Vertices { //ANTON
-			gocv.Circle(&shapeimg, x, 5, red, 10)
+		for i, x := range shaperesult.Vertices { //ANTON
+			//gocv.Circle(&shapeimg, x, 5, red, 10)
+			//gocv.PutText(&shapeimg, fmt.Sprint(i), x, 2, 0.75, red, 1)
+			if i < len(shaperesult.Vertices)-1 {
+				gocv.Line(&shapeimg, x, shaperesult.Vertices[(i+4)%len(shaperesult.Vertices)], red, 2)
+			}
 		}
 
 		//fmt.Printf("\t %s\n", shaperesult.Shape)
@@ -157,9 +161,9 @@ func calculateDistanceBetweenTwoPoints(point1 image.Point, point2 image.Point) f
 	return math.Sqrt(float64((point2.X-point1.X)*(point2.X-point1.X)) + float64((point2.Y-point1.Y)*(point2.Y-point1.Y)))
 }
 
-func threePointAngle(pointA image.Point, pointB image.Point, pointC image.Point) float64 {
-	return math.Atan2(float64(pointC.X-pointA.X), float64(pointC.Y-pointA.Y)) - math.Atan2(float64(pointB.X-pointA.X), float64(pointB.Y-pointA.Y))
-}
+// func threePointAngle(pointA image.Point, pointB image.Point, pointC image.Point) float64 {
+// 	return math.Atan2(float64(pointC.X-pointA.X), float64(pointC.Y-pointA.Y)) - math.Atan2(float64(pointB.X-pointA.X), float64(pointB.Y-pointA.Y))
+// }
 
 func dotAngle(pointA image.Point, pointB image.Point, pointC image.Point) float64 {
 	a := [2]float64{float64(pointA.X - pointB.X), float64(pointA.Y - pointB.Y)} //FULt ändra ANTON
@@ -237,13 +241,18 @@ func isOctagon(points []image.Point, shapeperimeter float64) string {
 			circumference += calculateDistanceBetweenTwoPoints(v, points[0])
 		}
 	}
-	fmt.Println(shapeperimeter)
-	fmt.Println(circumference)
-	if math.Abs(shapeperimeter-circumference) < shapeperimeter*0.032 { //FIXME: 0.02 needs to be tested 0.032 ?
+
+	if math.Abs(shapeperimeter-circumference) < shapeperimeter*0.01 { //FIXME: 0.02 needs to be tested 0.032 ?
+		fmt.Println("shapeperimeter for octagon: ", shapeperimeter)
+		fmt.Println("circumference for octagon: ", circumference)
 		return "octagon"
 	} else if math.Abs(p1p5-p2p6) > 10 && math.Abs(p2p6-p3p7) > 10 && math.Abs(p3p7-p4p8) > 10 {
+		fmt.Println("shapeperimeter for ovale: ", shapeperimeter)
+		fmt.Println("circumference for ovale: ", circumference)
 		return "ovale"
 	} else {
+		fmt.Println("shapeperimeter for circle: ", shapeperimeter)
+		fmt.Println("circumference for circle: ", circumference)
 		return "circle"
 	}
 }
