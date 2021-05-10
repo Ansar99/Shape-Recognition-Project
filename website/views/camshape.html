@@ -1,0 +1,34 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <script src="https://vuejs.org/js/vue.js" ></script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="js/camshape.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" defer>
+    <link rel="stylesheet" type="text/css" href="css/camshape.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Saira Stencil One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
+  </head>
+
+  <!-- kallar <body> med id "main" för att  komma åt alla element i Vue -->
+    <div id="main">
+      <body >
+
+        <header class="header">
+
+          <h1 id="headerText"> Camera shape detection</h1>
+        </header>
+        <button v-on:click="backToMain">&#8617;</button>
+
+        <button v-on:click="startCamera" id="cameraButton">Start Camera</button>
+        <h3 id="camInfo"> Press any key to close the camera window</h3>
+        <div id="outputContainer">
+          <!--<p id="output">{{str}}</p>-->
+        </div>
+
+        </div>
+
+      </body>
+    </div>
+</html>

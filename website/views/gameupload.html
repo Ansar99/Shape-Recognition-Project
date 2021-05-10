@@ -1,0 +1,36 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <script src="https://vuejs.org/js/vue.js" ></script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="js/gameupload.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" defer>
+    <link rel="stylesheet" type="text/css" href="css/gameupload.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Saira Stencil One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
+  </head>
+
+  <!-- kallar <body> med id "main" för att  komma åt alla element i Vue -->
+    <div id="main">
+      <body >
+
+        <header class="header">
+
+          <h1 id="headerText"> Welcome to ShapeItUp! </h1>
+        </header>
+        <button v-on:click="backToMain">&#8617;</button>
+
+
+        <div id="result">
+          <h2>1.{{correctShape}} </h2>
+          <h2>2.{{guesses}}</h2>
+          <h2>3.{{status}} </h2>
+          <h2>{{failed}}</h2>
+        </div>
+
+    </div>
+
+  </body>
+</div>
+</html>

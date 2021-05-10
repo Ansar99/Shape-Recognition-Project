@@ -1,18 +1,11 @@
 package main
 
-// RUN by typing: go run main.go images/image4.jpg shapedImages/shaped_image4.jpg
-// or choose your own image: go run main.go selected_image.jpg resulting_image_save.jpg
-
 import (
-	"errors"
 	"fmt"
 	"image"
 	"image/color"
-	"log"
 	"math"
-	"os"
 	"runtime"
-	"time"
 
 	"gocv.io/x/gocv"
 )
@@ -24,31 +17,25 @@ type Result struct {
 }
 
 func main() {
-	if len(os.Args) < 3 {
-		fmt.Println("usage: go run main.go selected_image.jpg resulting_image_save.jpg")
-		return
-	}
-	start := time.Now()
+	webcam, _ := gocv.VideoCaptureDevice(0)
+	window := gocv.NewWindow("Shape Detect")
+	img := gocv.NewMat()
 
-	imageloc := os.Args[1]
-	saveResultAs := os.Args[2]
+	for {
+		webcam.Read(&img)
+		shapeimg, err := imageToGrayscaleMat(img)
+		if err != nil {
+			fmt.Println("hej")
+			break
+		}
+		updatedshapeimg := markAndFindShapes(shapeimg)
+		window.IMShow(updatedshapeimg)
+		//window.WaitKey(1)
 
-	shapeimg, err := imageToGrayscaleMat(imageloc)
-	if err != nil {
-		log.Fatalf("Error while creating grayscaled Mat: %v", err)
-	} else {
-		//fmt.Println("Creation of grayscaled Mat succeeded")
+		if window.WaitKey(1) >= 0 {
+            break
+        }
 	}
-
-	updatedshapeimg := markAndFindShapes(shapeimg)
-	shapeimgconversion := gocv.IMWrite(saveResultAs, updatedshapeimg)
-	if shapeimgconversion {
-		//fmt.Println(saveResultAs + " saved successfully")
-	} else {
-		log.Fatalf("Error in converting" + saveResultAs)
-	}
-	elapsed := time.Since(start)
-	log.Printf("shapeidentifier took: %s", elapsed)
 }
 
 // markAndFindShapes creates a worker for each shape found in shapeimg.
@@ -58,30 +45,34 @@ func markAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 	canny := gocv.NewMat()
 	gocv.Canny(shapeimg, &canny, 10, 10)
 
-	contours := gocv.FindContours(canny, gocv.RetrievalExternal, gocv.ChainApproxTC89L1)
+	contours := gocv.FindContours(canny, gocv.RetrievalList, gocv.ChainApproxTC89L1)
 	imgpoints := contours.ToPoints()
 	amtOfJobs := contours.Size()
 
 	jobs := make(chan int, amtOfJobs)
 	result := make(chan Result, amtOfJobs)
-  
+	//fmt.Println(runtime.NumCPU())
 	for amountOfRoutines := 0; amountOfRoutines < runtime.NumCPU()-1; amountOfRoutines++ {
 		go worker(shapeimg, contours, imgpoints, jobs, result)
 	}
 
-	for i := 0; i < amtOfJobs; i++ {
+	for i := 0; i < amtOfJobs; i = i + 2 {
 		jobs <- i
 	}
 	close(jobs)
 
-	for j := 0; j < amtOfJobs; j++ {
+	for j := 0; j < amtOfJobs; j = j + 2 {
 		shaperesult := <-result
 		red := color.RGBA{255, 0, 0, 0}
+		if shaperesult.Shape == "bad" {
+			continue
+		}
 		gocv.PutText(&shapeimg, shaperesult.Shape, shaperesult.Textpoint, 2, 0.75, red, 1)
-		fmt.Printf("%s\n", shaperesult.Shape)
+		gocv.DrawContours(&shapeimg, contours, -1, color.RGBA{0, 255, 0, 0}, 1)
+		//fmt.Printf("\t %s\n", shaperesult.Shape)
 	}
 
-	gocv.DrawContours(&shapeimg, contours, -1, color.RGBA{0, 0, 255, 0}, 1)
+	gocv.DrawContours(&shapeimg, contours, -1, color.RGBA{0, 255, 0, 0}, 1)
 	return shapeimg
 }
 
@@ -105,13 +96,24 @@ func worker(shapeimg gocv.Mat, contours gocv.PointsVector, imgpoints [][]image.P
 func detectshape(pvr gocv.PointVector) Result {
 	shape := "unidentified shape"
 	shapeperimeter := gocv.ArcLength(pvr, true)
+
 	shapeguess := gocv.ApproxPolyDP(pvr, 0.03*shapeperimeter, true)
 
 	shapeguessRightType := shapeguess.ToPoints()
 
+	if shapeperimeter < 500 {
+		var resultbad Result
+		resultbad.Shape = "bad"
+		resultbad.Textpoint = shapeguessRightType[0]
+
+		return resultbad
+	}
+
 	textpoint := shapeguessRightType[0]
 	textpoint.X = textpoint.X - 5
+
 	vertices := len(shapeguessRightType)
+
 	if vertices == 3 {
 		shape = "triangle"
 	} else if vertices == 4 {
@@ -126,7 +128,7 @@ func detectshape(pvr gocv.PointVector) Result {
 		p2p3 := calculateDistanceBetweenTwoPoints(p2, p3)
 		p3p4 := calculateDistanceBetweenTwoPoints(p3, p4)
 		p4p1 := calculateDistanceBetweenTwoPoints(p4, p1)
-		if (p1p2-p2p3) < 10 && (p2p3-p3p4) < 10 && (p4p1-p1p2) < 10 {
+		if (p1p2-p2p3) < 30 && (p2p3-p3p4) < 30 && (p4p1-p1p2) < 30 {
 			shape = "square"
 		} else {
 			shape = "rectangle"
@@ -146,7 +148,7 @@ func detectshape(pvr gocv.PointVector) Result {
 	} else if vertices == 9 {
 		shape = "nonagon"
 	} else {
-		shape = "circle"
+		shape = ""
 	} // If more shapes needs to be detected, add them here.
 
 	var result Result
@@ -177,21 +179,11 @@ func isOctagon(points []image.Point) bool {
 	return false
 }
 
-// imageToGrayScaleMat converts a path of an image to a gocv.Mat, grayscales it and blurs it.
-// if the path is invalid an error occours.
-// returns a gocv.Mat or an error.
-func imageToGrayscaleMat(imgname string) (gocv.Mat, error) {
-	img := gocv.IMRead(imgname, gocv.IMReadGrayScale)
-	if img.Empty() {
-		return gocv.Mat{}, errors.New("image img in imageToGrayscaleMat is empty")
-	}
-	gocv.MedianBlur(img, &img, 11)
-
+func imageToGrayscaleMat(imgname gocv.Mat) (gocv.Mat, error) {
+	gocv.MedianBlur(imgname, &imgname, 11)
 	shapeimg := gocv.NewMat()
-	gocv.CvtColor(img, &shapeimg, gocv.ColorGrayToBGR)
-	if shapeimg.Empty() {
-		return gocv.Mat{}, errors.New("image shapeimg in imageToGrayscaleMat is empty")
-	}
+	gocv.BilateralFilter(imgname, &shapeimg, 10, float64(100), float64(100))
+	//gocv.CvtColor(imgname, &shapeimg, gocv.ColorGrayToBGR)
 
 	return shapeimg, nil
 }
