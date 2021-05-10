@@ -58,23 +58,23 @@ func markAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 	canny := gocv.NewMat()
 	gocv.Canny(shapeimg, &canny, 10, 10)
 
-	contours := gocv.FindContours(canny, gocv.RetrievalList, gocv.ChainApproxTC89L1)
+	contours := gocv.FindContours(canny, gocv.RetrievalExternal, gocv.ChainApproxTC89L1)
 	imgpoints := contours.ToPoints()
 	amtOfJobs := contours.Size()
 
 	jobs := make(chan int, amtOfJobs)
 	result := make(chan Result, amtOfJobs)
-	//fmt.Println(runtime.NumCPU())
+  
 	for amountOfRoutines := 0; amountOfRoutines < runtime.NumCPU()-1; amountOfRoutines++ {
 		go worker(shapeimg, contours, imgpoints, jobs, result)
 	}
 
-	for i := 0; i < amtOfJobs; i = i + 2 {
+	for i := 0; i < amtOfJobs; i++ {
 		jobs <- i
 	}
 	close(jobs)
 
-	for j := 0; j < amtOfJobs; j = j + 2 {
+	for j := 0; j < amtOfJobs; j++ {
 		shaperesult := <-result
 		red := color.RGBA{255, 0, 0, 0}
 		gocv.PutText(&shapeimg, shaperesult.Shape, shaperesult.Textpoint, 2, 0.75, red, 1)
