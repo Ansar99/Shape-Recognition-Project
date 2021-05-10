@@ -83,7 +83,14 @@ body {
 
 }
 #result{
-    display:flex;
+    margin-top: 20%;
+    display:grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 200px 100px;
     justify-content: center;
     font-size:30px;
+}
+
+#status{
+    grid-area: 2/2/3/3;
 }
