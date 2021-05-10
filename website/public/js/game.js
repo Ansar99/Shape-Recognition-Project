@@ -52,7 +52,7 @@ const vm = new Vue({
             window:history.go(-1);
         },
         sendGuess: function(){
-            console.log("HÄR ÄR JAG");
+
             socket.emit("forwardGuesses", {
                 guess:this.guesses,
                 correcAnswer: this.correctShape

@@ -9,7 +9,9 @@ const vm = new Vue({
         correctShape:"",
         guesses:"",
         status:"",
-        failed:""
+        failed:"",
+        listOfGuesses:[]
+
     },
 
     // Vue cycle created: all functions are available after the vue object is created.
@@ -17,25 +19,24 @@ const vm = new Vue({
 
 
         socket.on("guesses", function(g){
-            this.guesses = "Your guesses are: "  + g.guesses;
-
-
+            this.guesses = "Your guesses are: " + g.guesses;
+            this.listOfGuesses = g.guesses.split("\n");
 
         }.bind(this));
 
         socket.on("correctAnswerToClient", function(answer){
 
             this.correctShape =  answer.rightGuess[0];
-            var guessesList = this.guesses.split("\n");
 
-            console.log(guessesList);
+            console.log("listOfGuesses: "+this.listOfGuesses);
             console.log("correctshape: "+this.correctShape);
-            console.log("list length is: " + guessesList.length);
+            console.log("list length is: " + this.listOfGuesses.length);
             console.log("guesses:"+ this.guesses);
 
-            if((guessesList.length - 1) < 4){
+            if((this.listOfGuesses.length - 1) < 4){
                 this.failed="";
-                if (this.guesses.includes(this.correctShape[0])) {
+                if (this.listOfGuesses.includes(this.correctShape)) {
+
 
                     this.correctShape = "The right answer is: " + answer.rightGuess[0];
                     this.status = "You guessed the correct shape!";
