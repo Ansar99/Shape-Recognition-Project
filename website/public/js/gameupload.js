@@ -8,7 +8,7 @@ const vm = new Vue({
 
         correctShape:"",
         guesses:"",
-        status:"",
+        success:"",
         failed:"",
         listOfGuesses:[]
 
@@ -35,23 +35,35 @@ const vm = new Vue({
 
             if((this.listOfGuesses.length - 1) < 4){
                 this.failed="";
+
+                let successElem = document.getElementById("success");
+                let failedElem = document.getElementById("failed");
                 if (this.listOfGuesses.includes(this.correctShape)) {
 
 
+                    successElem.style.display="inline";
+                    failedElem.style.display="none";
                     this.correctShape = "The right answer is: " + answer.rightGuess[0];
-                    this.status = "You guessed the correct shape!";
+                    this.success = "You guessed the correct shape!";
                 }
                 else {
 
-                    this.status = "You didn't guess the correct shape...";
+                    this.success="";
+                    failedElem.style.display="inline";
+                    successElem.style.display="none";
+
+                    this.correctShape = "The right answer is: " + answer.rightGuess[0];
+                    this.failed = "You didn't guess the correct shape...";
                 }
             }
             else{
 
-                this.status="";
+                let failedElem = document.getElementById("failed");
+                this.success="";
                 this.correctShape="";
                 this.guesses="";
-                this.failed = "Your image contained to many shapes, the maximum is 3"
+                failedElem.style.display="inline";
+                this.failed = "Your image contained to many shapes, the maximum is 3";
 
             }
 

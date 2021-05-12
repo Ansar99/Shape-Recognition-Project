@@ -16,14 +16,15 @@
       <body >
 
         <header class="header">
+
           <h1 id="headerText"> Camera shape detection</h1>
         </header>
-
         <button v-on:click="backToMain">&#8617;</button>
 
-        <div id="container">
-          <h3 id="camInfo"> Press any key to close the camera window</h3>
-          <button v-on:click="startCamera" id="cameraButton">Start Camera</button>
+        <button v-on:click="startCamera" id="cameraButton">Start Camera</button>
+        <h3 id="camInfo"> Press any key to close the camera window</h3>
+        <div id="outputContainer">
+          <!--<p id="output">{{str}}</p>-->
         </div>
 
         </div>

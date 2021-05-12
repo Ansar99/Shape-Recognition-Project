@@ -1,0 +1,38 @@
+<!DOCTYPE>
+
+<html>
+
+  <head>
+    <script src="https://vuejs.org/js/vue.js" ></script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="js/game.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" defer>
+    <link rel="stylesheet" type="text/css" href="css/game.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Saira Stencil One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
+  </head>
+
+  <div id="main">
+    <body>
+      <header class="header">
+        <h1 id="headerText"> Guess the shape!</h1>
+      </header>
+
+      <button v-on:click="backToMain">&#8617;</button>
+      <div id="clueContainer">
+        <h2>You have a maximum of three guesses on the uploaded image </h2>
+
+        <h3>{{correctShape[1]}}</h3>
+        <div id="formInput" class="col-12">
+          <form  id="form" method="post" enctype="multipart/form-data" action="/gameupload"  class="">
+            <input type="file" name="file">
+            <input type="submit" value="Start">
+          </form>
+        </div>
+
+      </div>
+    </body>
+  </div>
+
+</html>

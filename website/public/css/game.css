@@ -65,19 +65,26 @@ body {
 
 #clueContainer h2{
     margin-bottom: 50px;
+    grid-row:1;
 }
 
 #clueContainer{
-    display:flex;
+    display:grid;
     flex-wrap:wrap;
-
     justify-content: center;
     margin-top: 20%;
-    font-size:30px;
+    font-size:40px;
+    text-align:center;
 
 }
 #startButton{
     width:100px;
     height:30px;
     font-size:20px;
+}
+#form{
+    margin-top: 5%;
+    display:flex;
+    justify-content: center;
+    grid-row:2;
 }
