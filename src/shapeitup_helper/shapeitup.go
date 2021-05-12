@@ -1,19 +1,20 @@
 package helper
 
 import (
-
 	"fmt"
 	"image"
 	"image/color"
 	"math"
 	"runtime"
+
 	"gocv.io/x/gocv"
 )
 
-// A Result represents a shape and a point where text should be written.
+// A Result represents a Shape string, a Textpoint where Shape should be placed and a slice of points representing the Shape's Contour.
 type Result struct {
-	Shape     string      // The shape
-	Textpoint image.Point // The point where text is placed
+	Shape     string        // The shape
+	Textpoint image.Point   // The point where text is placed
+	Contour   []image.Point //The points for the countor of the detected shape
 }
 
 // markAndFindShapes creates a worker for each shape found in shapeimg.
@@ -31,7 +32,7 @@ func MarkAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 	result := make(chan Result, amtOfJobs)
 
 	for amountOfRoutines := 0; amountOfRoutines < runtime.NumCPU()-1; amountOfRoutines++ {
-		go worker(shapeimg, contours, imgpoints, jobs, result)
+		go worker(imgpoints, jobs, result)
 	}
 
 	for i := 0; i < amtOfJobs; i++ {
@@ -41,27 +42,27 @@ func MarkAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 
 	for j := 0; j < amtOfJobs; j++ {
 		shaperesult := <-result
+		if shaperesult.Shape == "tooSmall" {
+			continue
+		}
 		red := color.RGBA{255, 0, 0, 0}
 		gocv.PutText(&shapeimg, shaperesult.Shape, shaperesult.Textpoint, 2, 0.75, red, 1)
+		contour := [][]image.Point{shaperesult.Contour}
+		gocv.DrawContours(&shapeimg, gocv.NewPointsVectorFromPoints(contour), -1, color.RGBA{0, 0, 255, 0}, 1)
 		fmt.Printf("%s\n", shaperesult.Shape)
 	}
-
-	gocv.DrawContours(&shapeimg, contours, -1, color.RGBA{0, 0, 255, 0}, 1)
 	return shapeimg
 }
-
-
 
 // worker calls detectshape with the image points of a single shape.
 // the amount of jobs depends on the number of shapes found in markAndFindShapes.
 // the detected shape is sent to the result channel.
 // returns null.
-func worker(shapeimg gocv.Mat, contours gocv.PointsVector, imgpoints [][]image.Point, jobs <-chan int, result chan<- Result) {
+func worker(imgpoints [][]image.Point, jobs <-chan int, result chan<- Result) {
 	for i := range jobs {
 		shapeimgpointvector := imgpoints[i]
 		shapevector := gocv.NewPointVectorFromPoints(shapeimgpointvector)
-
-		shapedetectresult := detectshape(shapevector)
+		shapedetectresult := detectshape(shapevector, shapeimgpointvector)
 		result <- shapedetectresult
 	}
 }
@@ -69,9 +70,14 @@ func worker(shapeimg gocv.Mat, contours gocv.PointsVector, imgpoints [][]image.P
 // detectshape calculates the number of corners from a PointVector, containing points for a shape.
 // If no shape is found, "unidentified shape" is put into Result.
 // returns a Result containg the shape and a point for text.
-func detectshape(pvr gocv.PointVector) Result {
+func detectshape(pvr gocv.PointVector, shapeimgpointvector []image.Point) Result {
 	shape := "unidentified shape"
 	shapeperimeter := gocv.ArcLength(pvr, true)
+	if shapeperimeter < 200 {
+		var resultbad Result
+		resultbad.Shape = "tooSmall"
+		return resultbad
+	}
 	shapeguess := gocv.ApproxPolyDP(pvr, 0.03*shapeperimeter, true)
 
 	shapeguessRightType := shapeguess.ToPoints()
@@ -105,11 +111,7 @@ func detectshape(pvr gocv.PointVector) Result {
 	} else if vertices == 7 {
 		shape = "heptagon"
 	} else if vertices == 8 {
-		if isOctagon(shapeguessRightType) {
-			shape = "octagon"
-		} else {
-			shape = "circle"
-		}
+		shape = isOctagon(shapeguessRightType, shapeperimeter, pvr)
 	} else if vertices == 9 {
 		shape = "nonagon"
 	} else {
@@ -119,6 +121,7 @@ func detectshape(pvr gocv.PointVector) Result {
 	var result Result
 	result.Shape = shape
 	result.Textpoint = textpoint
+	result.Contour = shapeimgpointvector
 
 	return result
 }
@@ -129,17 +132,30 @@ func calculateDistanceBetweenTwoPoints(point1 image.Point, point2 image.Point) f
 	return math.Sqrt(float64((point2.X-point1.X)*(point2.X-point1.X)) + float64((point2.Y-point1.Y)*(point2.Y-point1.Y)))
 }
 
-// isOctagon checks wether a shape is a circle or an octagon
-// returns true if its an octagon, else false.
-func isOctagon(points []image.Point) bool {
-	var pointsArr [8]int
-	for i := 0; i < 8; i++ {
-		for _, v := range pointsArr {
-			if v == points[i].X {
-				return true
-			}
+// isOctagon checks wether a shape is a circle, oval or octagon
+// returns a string of the shape detected
+func isOctagon(points []image.Point, shapeperimeter float64, pvr gocv.PointVector) string {
+	p1 := points[0]
+	p2 := points[1]
+	p3 := points[2]
+	p4 := points[3]
+	p5 := points[4]
+	p6 := points[5]
+	p7 := points[6]
+	p8 := points[7]
+
+	p1p5 := calculateDistanceBetweenTwoPoints(p1, p5)
+	p2p6 := calculateDistanceBetweenTwoPoints(p2, p6)
+	p3p7 := calculateDistanceBetweenTwoPoints(p3, p7)
+	p4p8 := calculateDistanceBetweenTwoPoints(p4, p8)
+
+	if len(gocv.ApproxPolyDP(pvr, 0.01*shapeperimeter, true).ToPoints()) > 8 {
+		if math.Abs(p1p5-p2p6) > 10 && math.Abs(p2p6-p3p7) > 10 && math.Abs(p3p7-p4p8) > 10 {
+			return "ovale"
+		} else {
+			return "circle"
 		}
-		pointsArr[i] = points[i].X
+	} else {
+		return "octagon"
 	}
-	return false
 }
