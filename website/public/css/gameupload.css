@@ -83,14 +83,28 @@ body {
 
 }
 #result{
-    margin-top: 20%;
+
     display:grid;
-    grid-template-columns: auto auto auto;
     grid-gap: 200px 100px;
     justify-content: center;
-    font-size:30px;
+    font-size:35px;
 }
 
-#status{
-    grid-area: 2/2/3/3;
+#success{
+    grid-row:1;
+    font-size:50px;
+    color:rgb(0,100,0);
+}
+
+#correct{
+    grid-row:2;
+}
+
+#guess{
+    grid-row:3;
+}
+#failed{
+    grid-row:1;
+    font-size:50px;
+    color:red;
 }

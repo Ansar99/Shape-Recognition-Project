@@ -1,0 +1,16 @@
+package helper
+
+
+
+func Hello(name string) (string, error) {
+
+	// Error handling
+	if name == "" {
+
+		return "", errors.New("empty name")
+	}
+
+	// Return a greeting that embeds the name in a message.
+	message := fmt.Sprintf(randomFormat(), name)
+	return message, nil
+}
