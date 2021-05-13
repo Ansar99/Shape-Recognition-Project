@@ -1,6 +1,7 @@
 package helper
 
 import (
+	"errors"
 	"fmt"
 	"image"
 	"image/color"
@@ -10,16 +11,22 @@ import (
 	"gocv.io/x/gocv"
 )
 
-// A Result represents a Shape string, a Textpoint where Shape should be placed and a slice of points representing the Shape's Contour.
+// A Result represents:
+//
+// a Shape string,
+// a Textpoint where Shape should be placed
+// and a slice of points representing the Shape's Contour.
 type Result struct {
 	Shape     string        // The shape
 	Textpoint image.Point   // The point where text is placed
-	Contour   []image.Point //The points for the countor of the detected shape
+	Contour   []image.Point // The points for the countor of the detected shape
 }
 
 // markAndFindShapes creates a worker for each shape found in shapeimg.
-// for each shape found, a text is added to the image.
-// returns a gocv.Mat containing marked shapes.
+//
+// For each shape found, a text is added to the image and its contour is marked in blue.
+//
+// Returns a gocv.Mat containing marked shapes that were detected.
 func MarkAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 	canny := gocv.NewMat()
 	gocv.Canny(shapeimg, &canny, 10, 10)
@@ -55,9 +62,12 @@ func MarkAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 }
 
 // worker calls detectshape with the image points of a single shape.
-// the amount of jobs depends on the number of shapes found in markAndFindShapes.
-// the detected shape is sent to the result channel.
-// returns null.
+//
+// The amount of jobs depends on the number of shapes found in markAndFindShapes.
+//
+// The return value of detectShape is sent to the result channel.
+//
+// Returns null.
 func worker(imgpoints [][]image.Point, jobs <-chan int, result chan<- Result) {
 	for i := range jobs {
 		shapeimgpointvector := imgpoints[i]
@@ -67,9 +77,11 @@ func worker(imgpoints [][]image.Point, jobs <-chan int, result chan<- Result) {
 	}
 }
 
-// detectshape calculates the number of corners from a PointVector, containing points for a shape.
-// If no shape is found, "unidentified shape" is put into Result.
-// returns a Result containg the shape and a point for text.
+// detectshape approximates the number of corners from a gocv.PointVector and selects/calculates the shape using the corners.
+//
+// If no shape is found, then "unidentified" is put into Result.Shape.
+//
+// Returns a Result containg the shape, an image.Point for text placement and []image.Point for the contour.
 func detectshape(pvr gocv.PointVector, shapeimgpointvector []image.Point) Result {
 	shape := "unidentified shape"
 	shapeperimeter := gocv.ArcLength(pvr, true)
@@ -95,10 +107,10 @@ func detectshape(pvr gocv.PointVector, shapeimgpointvector []image.Point) Result
 		p4 := shapeguessRightType[3]
 
 		// If difference in distances is < 10, then its a square, otherwise rectangle
-		p1p2 := calculateDistanceBetweenTwoPoints(p1, p2)
-		p2p3 := calculateDistanceBetweenTwoPoints(p2, p3)
-		p3p4 := calculateDistanceBetweenTwoPoints(p3, p4)
-		p4p1 := calculateDistanceBetweenTwoPoints(p4, p1)
+		p1p2 := calculateDistance(p1, p2)
+		p2p3 := calculateDistance(p2, p3)
+		p3p4 := calculateDistance(p3, p4)
+		p4p1 := calculateDistance(p4, p1)
 		if (p1p2-p2p3) < 10 && (p2p3-p3p4) < 10 && (p4p1-p1p2) < 10 {
 			shape = "square"
 		} else {
@@ -126,14 +138,16 @@ func detectshape(pvr gocv.PointVector, shapeimgpointvector []image.Point) Result
 	return result
 }
 
-// calculateDistanceBetweenTwoPoints calculates the distance between two image.Point.
-// returns the distance as a float64
-func calculateDistanceBetweenTwoPoints(point1 image.Point, point2 image.Point) float64 {
+// calculateDistance calculates the distance between two image.Point.
+//
+// Returns the distance of type float64.
+func calculateDistance(point1 image.Point, point2 image.Point) float64 {
 	return math.Sqrt(float64((point2.X-point1.X)*(point2.X-point1.X)) + float64((point2.Y-point1.Y)*(point2.Y-point1.Y)))
 }
 
-// isOctagon checks wether a shape is a circle, oval or octagon
-// returns a string of the shape detected
+// isOctagon checks wether a shape is a circle, oval or octagon.
+//
+// Returns a string of the shape detected.
 func isOctagon(points []image.Point, shapeperimeter float64, pvr gocv.PointVector) string {
 	p1 := points[0]
 	p2 := points[1]
@@ -144,10 +158,10 @@ func isOctagon(points []image.Point, shapeperimeter float64, pvr gocv.PointVecto
 	p7 := points[6]
 	p8 := points[7]
 
-	p1p5 := calculateDistanceBetweenTwoPoints(p1, p5)
-	p2p6 := calculateDistanceBetweenTwoPoints(p2, p6)
-	p3p7 := calculateDistanceBetweenTwoPoints(p3, p7)
-	p4p8 := calculateDistanceBetweenTwoPoints(p4, p8)
+	p1p5 := calculateDistance(p1, p5)
+	p2p6 := calculateDistance(p2, p6)
+	p3p7 := calculateDistance(p3, p7)
+	p4p8 := calculateDistance(p4, p8)
 
 	if len(gocv.ApproxPolyDP(pvr, 0.01*shapeperimeter, true).ToPoints()) > 8 {
 		if math.Abs(p1p5-p2p6) > 10 && math.Abs(p2p6-p3p7) > 10 && math.Abs(p3p7-p4p8) > 10 {
@@ -158,4 +172,41 @@ func isOctagon(points []image.Point, shapeperimeter float64, pvr gocv.PointVecto
 	} else {
 		return "octagon"
 	}
+}
+
+// BlurMat blurs a gocv.Mat using gocv.MedianBlur and reduces noise on the gocv.Mat using gocv.BilateralFilter.
+//
+// If the mat img is empty, an error is returned.
+//
+// Returns a blurred gocv.Mat with reduced noise.
+func BlurMat(img gocv.Mat) (gocv.Mat, error) {
+	if img.Empty() {
+		return gocv.Mat{}, errors.New("image img in BlurMat is empty")
+	}
+	shapeimg := gocv.NewMat()
+	gocv.MedianBlur(img, &img, 11)
+	gocv.BilateralFilter(img, &shapeimg, 10, float64(100), float64(100))
+
+	return shapeimg, nil
+}
+
+// ImageToGrayScaleMat converts a path of an image to a gocv.Mat, grayscales it and blurs it.
+//
+// If the path is invalid, or one of the gocv.Mat is empty an error occours.
+//
+// Returns a gocv.Mat or an error.
+func ImageToGrayscaleMat(imgname string) (gocv.Mat, error) {
+	img := gocv.IMRead(imgname, gocv.IMReadGrayScale)
+	if img.Empty() {
+		return gocv.Mat{}, errors.New("image img in imageToGrayscaleMat is empty")
+	}
+	gocv.MedianBlur(img, &img, 11)
+
+	shapeimg := gocv.NewMat()
+	gocv.CvtColor(img, &shapeimg, gocv.ColorGrayToBGR)
+	if shapeimg.Empty() {
+		return gocv.Mat{}, errors.New("image shapeimg in imageToGrayscaleMat is empty")
+	}
+
+	return shapeimg, nil
 }
