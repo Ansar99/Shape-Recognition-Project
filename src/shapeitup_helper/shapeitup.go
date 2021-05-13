@@ -42,7 +42,7 @@ func MarkAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 
 	for j := 0; j < amtOfJobs; j++ {
 		shaperesult := <-result
-		if shaperesult.Shape == "tooSmall" {
+		if shaperesult.Shape == "unidentified" {
 			continue
 		}
 		red := color.RGBA{255, 0, 0, 0}
@@ -75,7 +75,7 @@ func detectshape(pvr gocv.PointVector, shapeimgpointvector []image.Point) Result
 	shapeperimeter := gocv.ArcLength(pvr, true)
 	if shapeperimeter < 200 {
 		var resultbad Result
-		resultbad.Shape = "tooSmall"
+		resultbad.Shape = "unidentified"
 		return resultbad
 	}
 	shapeguess := gocv.ApproxPolyDP(pvr, 0.03*shapeperimeter, true)
@@ -115,7 +115,7 @@ func detectshape(pvr gocv.PointVector, shapeimgpointvector []image.Point) Result
 	} else if vertices == 9 {
 		shape = "nonagon"
 	} else {
-		shape = "circle"
+		shape = "unidentified"
 	} // If more shapes needs to be detected, add them here.
 
 	var result Result
