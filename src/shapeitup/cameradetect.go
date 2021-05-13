@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"image"
-	"shapeitup.com/helper"
+
 	"gocv.io/x/gocv"
+	"shapeitup.com/helper"
 )
 
 // A Result represents a shape and a point where text should be written.
@@ -20,9 +20,8 @@ func main() {
 
 	for {
 		webcam.Read(&img)
-		shapeimg, err := imageToGrayscaleMat(img)
+		shapeimg, err := blurMat(img)
 		if err != nil {
-			fmt.Println("hej")
 			break
 		}
 		updatedshapeimg := helper.MarkAndFindShapes(shapeimg)
@@ -30,13 +29,12 @@ func main() {
 		//window.WaitKey(1)
 
 		if window.WaitKey(1) >= 0 {
-            break
-        }
+			break
+		}
 	}
 }
 
-
-func imageToGrayscaleMat(imgname gocv.Mat) (gocv.Mat, error) {
+func blurMat(imgname gocv.Mat) (gocv.Mat, error) {
 	gocv.MedianBlur(imgname, &imgname, 11)
 	shapeimg := gocv.NewMat()
 	gocv.BilateralFilter(imgname, &shapeimg, 10, float64(100), float64(100))
