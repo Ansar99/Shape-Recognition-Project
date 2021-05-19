@@ -2,7 +2,6 @@ package helper
 
 import (
 	"errors"
-	"fmt"
 	"image"
 	"image/color"
 	"math"
@@ -27,7 +26,7 @@ type Result struct {
 // For each shape found, a text is added to the image and its contour is marked in blue.
 //
 // Returns a gocv.Mat containing marked shapes that were detected.
-func MarkAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
+func MarkAndFindShapes(shapeimg gocv.Mat) (gocv.Mat, string) {
 	canny := gocv.NewMat()
 	gocv.Canny(shapeimg, &canny, 10, 10)
 
@@ -37,6 +36,8 @@ func MarkAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 
 	jobs := make(chan int, amtOfJobs)
 	result := make(chan Result, amtOfJobs)
+
+	teststr := ""
 
 	for amountOfRoutines := 0; amountOfRoutines < runtime.NumCPU()-1; amountOfRoutines++ {
 		go worker(imgpoints, jobs, result)
@@ -56,9 +57,14 @@ func MarkAndFindShapes(shapeimg gocv.Mat) gocv.Mat {
 		gocv.PutText(&shapeimg, shaperesult.Shape, shaperesult.Textpoint, 2, 0.75, red, 1)
 		contour := [][]image.Point{shaperesult.Contour}
 		gocv.DrawContours(&shapeimg, gocv.NewPointsVectorFromPoints(contour), -1, color.RGBA{0, 0, 255, 0}, 1)
-		fmt.Printf("%s\n", shaperesult.Shape)
+		//fmt.Printf("%s\n", shaperesult.Shape)
+		if teststr == "" {
+			teststr = shaperesult.Shape
+		} else {
+			teststr = teststr + ", " + shaperesult.Shape
+		}
 	}
-	return shapeimg
+	return shapeimg, teststr
 }
 
 // worker calls detectshape with the image points of a single shape.
@@ -90,7 +96,7 @@ func detectshape(pvr gocv.PointVector, shapeimgpointvector []image.Point) Result
 		resultbad.Shape = "unidentified"
 		return resultbad
 	}
-	shapeguess := gocv.ApproxPolyDP(pvr, 0.03*shapeperimeter, true)
+	shapeguess := gocv.ApproxPolyDP(pvr, 0.02*shapeperimeter, true)
 
 	shapeguessRightType := shapeguess.ToPoints()
 
