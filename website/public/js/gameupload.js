@@ -20,7 +20,7 @@ const vm = new Vue({
 
         socket.on("guesses", function(g){
             this.guesses = "Your guesses are: " + g.guesses;
-            this.listOfGuesses = g.guesses.split("\n");
+            this.listOfGuesses = g.guesses.split(", ");
 
         }.bind(this));
 
