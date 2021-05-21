@@ -234,7 +234,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on("startCamera", function(){
-        pid = runGo.exec("go run ../src/shapeitup/cameradetect.go", (error,stdout,stderr) => {
+        pid = runGo.exec("go run ../src/shapeitup/main.go", (error,stdout,stderr) => {
         });
     });
 
