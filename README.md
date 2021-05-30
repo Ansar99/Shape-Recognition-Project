@@ -14,7 +14,7 @@ To run the program, locate to folder ```cd Odyssey/src/shapeitup ``` and run:
 ```bash
 go run main.go selected_image_location.jpg resulting_image_save_location.jpg
 ```
-To run the program using a camera locate to folder ```cd Odyssey/src/shapeitup``` and run::
+To run the program using a camera locate to folder ```cd Odyssey/src/shapeitup``` and run:
 ```bash
 go run main.go
 ```
