@@ -1,7 +1,7 @@
 package main
 
 // RUN by typing: go run main.go images/image4.jpg shapedImages/shaped_image4.jpg
-// or choose your own image: go run main.go selected_image.jpg resulting_image_save.jpg
+// or choose your own image: go run main.go selected_image_location.jpg resulting_image_save_location.jpg
 
 import (
 	"fmt"
