@@ -24,7 +24,7 @@ To start the website with all the features, locate to ```cd Odyssey/website``` a
 npm install
 node app.js
 ```
-The website can then be found at the url localhost:3000
+The website can then be found at the url ```localhost:3000```
 
 ## Contributing
 This is a project that is now done. Contributes are not welcome.
