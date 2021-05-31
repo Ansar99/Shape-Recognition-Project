@@ -7,6 +7,7 @@ Shape It Up is a program that finds and identifies 2d geometric shapes in a .jpg
 ## Installation
 
 Before running Shape it Up it is crucial that [gocv](https://gocv.io/) is installed.
+
 To use the website functionality, [nodejs](https://nodejs.org/en/) needs to be installed.
 
 ## Usage
