@@ -2,7 +2,7 @@
 
 # Shape It Up
 
-Shape It Up is a program that finds and identifies 2d geometric shapes in an image.
+Shape It Up is a program that finds and identifies 2d geometric shapes in a .jpg image.
 
 ## Installation
 
